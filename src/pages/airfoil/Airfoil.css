@@ -1,0 +1,819 @@
+.airfoil-card-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.airfoil-card-header .favorite-btn {
+  background-color: transparent;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  outline: none;
+}
+
+.airfoil-card-header .favorite-icon {
+  color: #00adef;
+}
+
+.airfoil-card-header span {
+  margin-left: 10px;
+}
+
+.airfoil-plot .card-section-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.airfoil-plot .card-section-content .show {
+  width: 100%;
+  padding: 2% 2%;
+}
+
+.airfoil-card-wrapper .posted-by-row {
+  margin-left: 10px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  letter-spacing: -0.01em;
+  color: #635a5a;
+}
+
+.airfoil-card-wrapper .posted-by-row .posted-by-link {
+  color: #007bff;
+  cursor: pointer;
+}
+
+.airfoil-card-wrapper .posted-by-row .posted-by-link:hover {
+  text-decoration: underline;
+}
+
+.airfoil-card-wrapper .airfoil-characteristics .characteristic {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.airfoil-card-wrapper .airfoil-characteristics .characteristic .characteristic-header {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 16px;
+  /* identical to box height */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  letter-spacing: -0.01em;
+  color: #635a5a;
+}
+
+.airfoil-card-wrapper .airfoil-characteristics .characteristic .characteristic-detail {
+  margin: 2% 1%;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 11px;
+  line-height: 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  letter-spacing: 0.09em;
+  color: #635a5a;
+}
+
+.airfoil-card-wrapper .get-geometrie .card-section-content .show {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.runs-card .runs-card-plot .card-section-content .show {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.runs-card .runs-card-plot .active-plots-list {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.runs-card .runs-card-plot .active-plots-list .active-plots-list-header {
+  width: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 2% 3%;
+  margin: 0 10%;
+  border-bottom: 1px solid #d7d7d7;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 16px;
+  /* identical to box height */
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: -0.01em;
+  color: #635a5a;
+}
+
+.runs-card .runs-card-plot .active-plots-list .active-plots-list-details .run-item {
+  position: relative;
+  height: 2.8rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 11%;
+}
+
+.runs-card .runs-card-plot .active-plots-list .active-plots-list-details .run-item .remove-run-item-btn {
+  position: absolute;
+  -webkit-transform: translateX(-120%);
+          transform: translateX(-120%);
+}
+
+.runs-card .runs-card-plot .active-plots-list .active-plots-list-details .run-item .remove-run-item-btn .remove-ploted-run {
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.runs-card .runs-card-plot .active-plots-list .active-plots-list-details .run-item .information-area {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 0 3%;
+}
+
+.runs-card .runs-card-plot .active-plots-list .active-plots-list-details .run-item .information-area .run-item-information {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 33.33%;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1.53rem;
+  line-height: 16px;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  letter-spacing: 0.09em;
+  color: #635a5a;
+}
+
+.runs-card .runs-card-plot .active-plots-list .active-plots-list-details .run-item .information-area #run-item-reynolds {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.runs-card .runs-card-plot .active-plots-list .active-plots-list-details .run-item .information-area #run-item-mach {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.runs-card .runs-card-plot .plot-type-control-row {
+  width: 80%;
+  height: 2.8rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 4.2rem;
+}
+
+.runs-card .runs-card-plot .plot-type-control-row .plot-type-control-btn {
+  width: 33.33%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  cursor: pointer;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.4rem;
+  line-height: 15px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: -0.01em;
+  color: #635a5a;
+}
+
+.runs-card .runs-card-plot .plot-type-control-row .selected {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.runs-card .runs-card-plot .plot-type-control-row #cl {
+  border-top: 1.8px solid #d7d7d7;
+  border-bottom: 1.8px solid #d7d7d7;
+  border-left: 1.8px solid #d7d7d7;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.runs-card .runs-card-plot .plot-type-control-row #cd {
+  border: 1.8px solid #d7d7d7;
+}
+
+.runs-card .runs-card-plot .plot-type-control-row #cm {
+  border-top: 1.8px solid #d7d7d7;
+  border-bottom: 1.8px solid #d7d7d7;
+  border-right: 1.8px solid #d7d7d7;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.runs-card .runs-card-plot .runs-plot-area {
+  width: 100%;
+  height: 23rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 5rem 0;
+}
+
+.runs-card .runs-polar-properties .show {
+  padding: 0;
+}
+
+.runs-card .runs-polar-properties .ploted-run-polar-properties .ploted-run-polar-properties-header {
+  height: 2.5rem;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.7rem;
+  line-height: 16px;
+  /* identical to box height */
+  padding-left: 2%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+.runs-card .runs-polar-properties .ploted-run-polar-properties .ploted-run-polar-properties-header .collapse-icon {
+  font-size: 2rem;
+  color: #ffffff;
+  margin-right: 0.7%;
+}
+
+.runs-card .runs-polar-properties .ploted-run-polar-properties .ploted-run-polar-properties-details .show {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.runs-card .runs-polar-properties .ploted-run-polar-properties .ploted-run-polar-properties-details .show .propertie-wrapper {
+  width: 25%;
+  height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0.5rem 0;
+}
+
+.runs-card .runs-polar-properties .ploted-run-polar-properties .ploted-run-polar-properties-details .show .propertie-wrapper .propertie-header {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.55rem;
+  line-height: 16px;
+  /* identical to box height */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  letter-spacing: -0.01em;
+  color: #635a5a;
+}
+
+.runs-card .runs-polar-properties .ploted-run-polar-properties .ploted-run-polar-properties-details .show .propertie-wrapper .propertie-detail {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1.55rem;
+  line-height: 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  letter-spacing: 0.09em;
+  color: #635a5a;
+}
+
+.runs-card .runs-card-filter .add-filter-row {
+  height: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 2rem 0;
+}
+
+.runs-card .runs-card-filter .add-filter-row .add-filter-btn {
+  position: relative;
+  width: 10rem;
+  height: 2.8rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  cursor: pointer;
+  padding-left: 3%;
+  border: 1px solid #00adef;
+  border-radius: 3px;
+  -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+          box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+.runs-card .runs-card-filter .add-filter-row .add-filter-btn span {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1.4rem;
+  line-height: 15px;
+  /* identical to box height */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  letter-spacing: -0.06em;
+  color: #00adef;
+}
+
+.runs-card .runs-card-filter .add-filter-row .add-filter-btn .add-filter-icon {
+  position: absolute;
+  left: 4%;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  font-size: 1.8rem;
+  color: #00adef;
+}
+
+.runs-card .runs-card-filter .add-filter-row .add-filter-input .add-filter-dropdown-value {
+  width: 10rem;
+  height: 2.8rem;
+  padding-left: 7%;
+  padding-right: 5%;
+  border: 0.5px solid #dee2e6;
+  -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+          box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
+}
+
+.runs-card .runs-card-filter .active-filters .active-filter {
+  height: 2.8rem;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border: 0.5px solid #635a5a;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+          box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+  border-radius: 0.42rem;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  margin-left: 3%;
+  padding: 0 0.9rem;
+}
+
+.runs-card .runs-card-filter .active-filters .active-filter .active-filter-text {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1.4rem;
+  line-height: 15px;
+  color: #635a5a;
+}
+
+.runs-card .runs-card-filter .active-filters .active-filter .active-filter-type {
+  margin: 0 0.7rem;
+}
+
+.runs-card .runs-card-filter .active-filters .active-filter .ative-filter-icon {
+  font-size: 1.7rem;
+  color: #ed474a;
+  margin-left: 0.4rem;
+  cursor: pointer;
+}
+
+.runs-card .runs-card-results .card-section-content {
+  padding: 0;
+}
+
+.runs-card .runs-card-results .show {
+  padding: 0;
+}
+
+.runs-card .runs-card-results .controls-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 5rem;
+}
+
+.runs-card .runs-card-results .controls-row .result-control-btn {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 50%;
+  height: 3.8rem;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-left: 15px;
+  cursor: pointer;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.4rem;
+  line-height: 15px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.runs-card .runs-card-results .controls-row .result-control-btn .result-control-btn-icon {
+  font-size: 2.3rem;
+}
+
+.runs-card .runs-card-results .controls-row .result-control-btn .result-control-btn-text {
+  position: absolute;
+  width: 100%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+
+.runs-card .runs-card-results .controls-row #select-all-results {
+  background-color: #00adef;
+}
+
+.runs-card .runs-card-results .controls-row #unselect-all-results {
+  background-color: #ed474a;
+}
+
+.runs-card .runs-card-results .run-results-list .run-result-item .add-remove-run-result-icon {
+  font-size: 3.3rem;
+  cursor: pointer;
+  color: #635a5a;
+}
+
+.runs-card .runs-card-results .run-results-list .run-result-item .run-result-item-header {
+  width: 100%;
+  height: 5.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-left: 3%;
+  cursor: pointer;
+  border-bottom: 1px solid #d7d7d7;
+}
+
+.runs-card .runs-card-results .run-results-list .run-result-item .run-result-item-header .click-area {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #635a5a;
+}
+
+.runs-card .runs-card-results .run-results-list .run-result-item .run-result-item-header .click-area .run-name {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 2.5rem;
+  line-height: 27px;
+  /* identical to box height */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  letter-spacing: -0.06em;
+}
+
+.runs-card .runs-card-results .run-results-list .run-result-item .run-result-item-header .click-area .column-information {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.runs-card .runs-card-results .run-results-list .run-result-item .run-result-item-header .click-area .column-information .column-information-header {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.53rem;
+  line-height: 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  letter-spacing: -0.01em;
+}
+
+.runs-card .runs-card-results .run-results-list .run-result-item .run-result-item-header .click-area .column-information .column-information-detail {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1.53rem;
+  line-height: 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  letter-spacing: 0.09em;
+}
+
+.runs-card .runs-card-results .run-results-list .run-result-item .run-result-item-options .collapse {
+  display: initial;
+}
+
+.runs-card .runs-card-results .run-results-list .run-result-item .run-result-item-options .collapse .run-result-item-option {
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  height: 0;
+  overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transform: translateY(-1px);
+          transform: translateY(-1px);
+}
+
+.runs-card .runs-card-results .run-results-list .run-result-item .run-result-item-options .collapse .run-result-item-option .option-icon {
+  font-size: 2.3rem;
+  color: white;
+  margin-left: 2.1rem;
+}
+
+.runs-card .runs-card-results .run-results-list .run-result-item .run-result-item-options .collapse .run-result-item-option .option-detail {
+  position: absolute;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.4rem;
+  line-height: 15px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.runs-card .runs-card-results .run-results-list .run-result-item .run-result-item-options .collapse #add-to-comparisson {
+  background-color: #007bff;
+}
+
+.runs-card .runs-card-results .run-results-list .run-result-item .run-result-item-options .collapse #remove-from-comparisson {
+  background-color: red;
+}
+
+.runs-card .runs-card-results .run-results-list .run-result-item .run-result-item-options .collapse #view-details {
+  background-color: #04e762;
+}
+
+.runs-card .runs-card-results .run-results-list .run-result-item .run-result-item-options .show .run-result-item-option {
+  position: relative;
+  height: 4.2rem;
+  cursor: pointer;
+}
+
+.runs-card .runs-card-results .run-results-list .run-result-item:first-of-type {
+  border-top: 1px solid #d7d7d7;
+}
+
+.runs-card .runs-card-results .run-results-list .opened {
+  background-color: var(--color-primary);
+}
+
+.runs-card .runs-card-results .run-results-list .opened .add-remove-run-result-icon {
+  color: white;
+}
+
+.runs-card .runs-card-results .run-results-list .opened .click-area .run-name {
+  color: white;
+}
+
+.runs-card .runs-card-results .run-results-list .opened .click-area .column-information {
+  color: white;
+}
+
+.runs-card .runs-card-results .run-results-list .closed {
+  background-color: #f8fcff;
+}
+
+.runs-card .pagination-nav-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin-top: 20px;
+}
+
+.runs-card .pagination-nav-row .change-page-btn {
+  height: 3.5rem;
+  background-color: var(--color-primary);
+  border-radius: 0.4rem;
+  cursor: pointer;
+  padding: 3px 1rem;
+  -webkit-box-shadow: 2px 2px 2px #d7d7d7;
+          box-shadow: 2px 2px 2px #d7d7d7;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 2rem;
+  line-height: 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  letter-spacing: -0.01em;
+  color: white;
+}

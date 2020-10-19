@@ -1,0 +1,31 @@
+.card {
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  border: none;
+  border-bottom: 1px solid #d7d7d7;
+  border-radius: 15px;
+  -webkit-box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.25);
+          box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.25);
+  margin-bottom: 20px;
+  background: var(--color-card);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding-bottom: 15px;
+}
+
+.card .card-content {
+  width: 100%;
+}

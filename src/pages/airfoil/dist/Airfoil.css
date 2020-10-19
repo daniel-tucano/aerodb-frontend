@@ -1,0 +1,359 @@
+.airfoil-card-header {
+  display: flex;
+}
+.airfoil-card-header .favorite-btn {
+  background-color: transparent;
+  box-shadow: none;
+  outline: none;
+}
+.airfoil-card-header .favorite-icon {
+  color: #00adef;
+}
+.airfoil-card-header span {
+  margin-left: 10px;
+}
+
+.airfoil-plot .card-section-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.airfoil-plot .card-section-content .show {
+  width: 100%;
+  padding: 2% 2%;
+}
+
+.airfoil-card-wrapper .posted-by-row {
+  margin-left: 10px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.01em;
+  color: #635a5a;
+}
+.airfoil-card-wrapper .posted-by-row .posted-by-link {
+  color: #007bff;
+  cursor: pointer;
+}
+.airfoil-card-wrapper .posted-by-row .posted-by-link:hover {
+  text-decoration: underline;
+}
+.airfoil-card-wrapper .airfoil-characteristics .characteristic {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.airfoil-card-wrapper .airfoil-characteristics .characteristic .characteristic-header {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 16px;
+  /* identical to box height */
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.01em;
+  color: #635a5a;
+}
+.airfoil-card-wrapper .airfoil-characteristics .characteristic .characteristic-detail {
+  margin: 2% 1%;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 11px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.09em;
+  color: #635a5a;
+}
+.airfoil-card-wrapper .get-geometrie .card-section-content .show {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.runs-card .runs-card-plot .card-section-content .show {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.runs-card .runs-card-plot .active-plots-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.runs-card .runs-card-plot .active-plots-list .active-plots-list-header {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2% 3%;
+  margin: 0 10%;
+  border-bottom: 1px solid #d7d7d7;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 16px;
+  /* identical to box height */
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: -0.01em;
+  color: #635a5a;
+}
+.runs-card .runs-card-plot .active-plots-list .active-plots-list-details .run-item {
+  position: relative;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  padding: 0 11%;
+}
+.runs-card .runs-card-plot .active-plots-list .active-plots-list-details .run-item .remove-run-item-btn {
+  position: absolute;
+  transform: translateX(-120%);
+}
+.runs-card .runs-card-plot .active-plots-list .active-plots-list-details .run-item .remove-run-item-btn .remove-ploted-run {
+  font-size: 13px;
+  cursor: pointer;
+}
+.runs-card .runs-card-plot .active-plots-list .active-plots-list-details .run-item .information-area {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 3%;
+}
+.runs-card .runs-card-plot .active-plots-list .active-plots-list-details .run-item .information-area .run-item-information {
+  display: flex;
+  width: 33.33%;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 11px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.09em;
+  color: #635a5a;
+}
+.runs-card .runs-card-plot .active-plots-list .active-plots-list-details .run-item .information-area #run-item-reynolds {
+  justify-content: center;
+}
+.runs-card .runs-card-plot .active-plots-list .active-plots-list-details .run-item .information-area #run-item-mach {
+  justify-content: flex-end;
+}
+.runs-card .runs-card-plot .plot-type-control-row {
+  width: 80%;
+  height: 20px;
+  display: flex;
+  margin-top: 30px;
+}
+.runs-card .runs-card-plot .plot-type-control-row .plot-type-control-btn {
+  width: 33.33%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 15px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: -0.01em;
+  color: #635a5a;
+}
+.runs-card .runs-card-plot .plot-type-control-row .selected {
+  background-color: var(--color-primary);
+  color: white;
+}
+.runs-card .runs-card-plot .plot-type-control-row #cl {
+  border-top: 1.8px solid #d7d7d7;
+  border-bottom: 1.8px solid #d7d7d7;
+  border-left: 1.8px solid #d7d7d7;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+.runs-card .runs-card-plot .plot-type-control-row #cd {
+  border: 1.8px solid #d7d7d7;
+}
+.runs-card .runs-card-plot .plot-type-control-row #cm {
+  border-top: 1.8px solid #d7d7d7;
+  border-bottom: 1.8px solid #d7d7d7;
+  border-right: 1.8px solid #d7d7d7;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+.runs-card .runs-card-plot .runs-plot-area {
+  width: 100%;
+  height: 270px;
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+}
+.runs-card .runs-card-results .card-section-content {
+  padding: 0;
+}
+.runs-card .runs-card-results .show {
+  padding: 0;
+}
+.runs-card .runs-card-results .controls-row {
+  display: flex;
+  margin-bottom: 5rem;
+}
+.runs-card .runs-card-results .controls-row .result-control-btn {
+  position: relative;
+  display: flex;
+  width: 50%;
+  height: 27px;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 15px;
+  cursor: pointer;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 15px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+.runs-card .runs-card-results .controls-row .result-control-btn .result-control-btn-icon {
+  font-size: 16px;
+}
+.runs-card .runs-card-results .controls-row .result-control-btn .result-control-btn-text {
+  position: absolute;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.runs-card .runs-card-results .controls-row #select-all-results {
+  background-color: #00adef;
+}
+.runs-card .runs-card-results .controls-row #unselect-all-results {
+  background-color: #ed474a;
+}
+.runs-card .runs-card-results .run-results-list .run-result-item .add-remove-run-result-icon {
+  font-size: 24px;
+  cursor: pointer;
+  color: #635a5a;
+}
+.runs-card .runs-card-results .run-results-list .run-result-item .run-result-item-header {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding-left: 3%;
+  border-bottom: 1px solid #d7d7d7;
+}
+.runs-card .runs-card-results .run-results-list .run-result-item .run-result-item-header .click-area {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: #635a5a;
+}
+.runs-card .runs-card-results .run-results-list .run-result-item .run-result-item-header .click-area .run-name {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 27px;
+  /* identical to box height */
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.06em;
+}
+.runs-card .runs-card-results .run-results-list .run-result-item .run-result-item-header .click-area .column-information {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.runs-card .runs-card-results .run-results-list .run-result-item .run-result-item-header .click-area .column-information .column-information-header {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: -0.01em;
+}
+.runs-card .runs-card-results .run-results-list .run-result-item .run-result-item-header .click-area .column-information .column-information-detail {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 11px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.09em;
+}
+.runs-card .runs-card-results .run-results-list .run-result-item .run-result-item-options .show .run-result-item-option {
+  position: relative;
+  width: 100%;
+  height: 4.2rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.runs-card .runs-card-results .run-results-list .run-result-item .run-result-item-options .show .run-result-item-option .option-icon {
+  font-size: 16px;
+  color: white;
+  margin-left: 15px;
+}
+.runs-card .runs-card-results .run-results-list .run-result-item .run-result-item-options .show .run-result-item-option .option-detail {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 15px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+.runs-card .runs-card-results .run-results-list .run-result-item .run-result-item-options .show #add-to-comparisson {
+  background-color: #007bff;
+}
+.runs-card .runs-card-results .run-results-list .run-result-item .run-result-item-options .show #view-details {
+  background-color: #04e762;
+}
+.runs-card .runs-card-results .run-results-list .run-result-item:first-of-type {
+  border-top: 1px solid #d7d7d7;
+}
+.runs-card .runs-card-results .run-results-list .opened {
+  background-color: var(--color-primary);
+}
+.runs-card .runs-card-results .run-results-list .opened .add-remove-run-result-icon {
+  color: white;
+}
+.runs-card .runs-card-results .run-results-list .opened .click-area .run-name {
+  color: white;
+}
+.runs-card .runs-card-results .run-results-list .opened .click-area .column-information {
+  color: white;
+}

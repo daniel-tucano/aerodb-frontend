@@ -1,0 +1,162 @@
+.login-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    overflow: scroll;
+    background-color: var(--color-primary);
+    
+    .back-button {
+        position: absolute;
+        color: white;
+        
+        left:3%;
+        top: 4%;
+        
+        
+        .link-button, button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            box-shadow: none;
+            text-emphasis: none;
+            text-decoration: none;
+            cursor: pointer;
+            
+            span {
+                color: white;
+                margin-left: 1rem;
+            }
+        }
+    }
+    
+    .container {
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        .logo-name {
+            margin-top: 25%;
+            img {
+                width: 20rem;
+            }
+        }
+
+        .login-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 75%;
+            height: 36rem;
+
+            margin-top: 10%;
+            margin-bottom: 20%;
+            padding: 0 7%;
+
+            box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.25);
+            background-color: var(--color-card);
+
+            .title {
+                margin-top: 2rem;
+                margin-bottom: 2.3rem;
+                font: var(--text-font-login-title);
+                color: var(--color-card-text-title);
+            }
+
+            .input-block {
+                width: 100%;
+                height: auto;
+                .input-box {
+                    position: relative;
+                    margin-top: 1rem;
+                    img {
+                        position: absolute;
+                        height: 2rem;
+                        top: 50%;
+                        left: 0.5rem;
+                        transform: translateY(-50%);
+                    }
+                    input {
+                        background-color: rgba(196, 196, 196, 0.53);
+                        width: 100%;
+                        height: 3rem;
+                        padding-left: 3rem;
+                        border: none;
+                    }
+
+                    .password {
+                        -webkit-text-security: disc;
+                    }
+                }
+
+                .input-box:first-child {
+                    margin-top: 0;
+                }
+            }
+
+            .login-button {
+                width: 100%;
+                height: 3.5rem;
+                margin-top: 2rem;
+                button {
+                    width: 100%;
+                    height: 100%;
+                    font: var(--text-font-login-button);
+                }
+            }
+
+            span#or-login-with {
+                margin-top: 1.5rem;
+                margin-bottom: 4rem;
+                color: var(--color-card-text-paragrath-lighter);
+                font: var(--text-font-login-paragrath);
+            }
+
+            .diferent-providers-block {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 10%;
+
+                button {
+                    background: transparent;
+                    border: 1px solid #c4c4c4;
+                    height: 2.8rem;
+                    width: 47%;
+                    color: #747474;
+                    font-size: 1.5rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    img {
+                        height: 100%;
+                    }
+                }
+
+                .facebook-button {
+                    .facebook-button-name-logo {
+                        height: 60%;
+                        transform: translateX(-5%);
+                    }
+                }
+
+                .google-button {
+                    img {
+                        height: 60%;
+                    }
+                    span {
+                        margin-left: 1rem;
+                        font-family: Raleway;
+                        font-style: normal;
+                        font-weight: bold;
+                        font-size: 100%;
+                        color: #747474;
+                    }
+                }
+            }
+        }
+    }
+}

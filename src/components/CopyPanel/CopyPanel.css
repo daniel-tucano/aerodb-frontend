@@ -1,0 +1,95 @@
+.copy-panel-wrapper {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 2.3rem 1fr;
+      grid-template-rows: 2.3rem 1fr;
+  -ms-grid-columns: 1fr 50px;
+      grid-template-columns: 1fr 50px;
+      grid-template-areas: 'title copyBtn' 'copytext copytext';
+  width: 100%;
+}
+
+.copy-panel-wrapper .copy-panel-title {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: title;
+  background-color: #f2f2f2;
+  font: 400 1.4rem Poppins;
+  border: 1px solid #e3e3e3;
+  border-right: none;
+  padding-left: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.copy-panel-wrapper .copy-panel-btn {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: copyBtn;
+  background-color: #f2f2f2;
+  border: 1px solid #e3e3e3;
+  font-size: 1.4rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.copy-panel-wrapper .copy-panel-btn .not-copied-icon {
+  color: black;
+  font-size: 8px;
+}
+
+.copy-panel-wrapper .copy-panel-btn .copied-icon {
+  color: white;
+  font-size: 12px;
+}
+
+.copy-panel-wrapper .copy-panel-btn span {
+  margin-left: 3px;
+}
+
+.copy-panel-wrapper .copied {
+  background-color: green;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+  border: 1px solid green;
+}
+
+.copy-panel-wrapper .not-copied {
+  -webkit-transition: all linear 1s;
+  transition: all linear 1s;
+}
+
+.copy-panel-wrapper .copy-panel-copy-text {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: copytext;
+  background-color: #fafafa;
+  border: 1px solid #e3e3e3;
+  border-top: none;
+  font: 300 1.3rem Poppins;
+  padding-left: 5px;
+  min-height: 34px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}

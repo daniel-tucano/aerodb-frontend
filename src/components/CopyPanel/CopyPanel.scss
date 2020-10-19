@@ -1,0 +1,73 @@
+.copy-panel-wrapper {
+    display: grid;
+    grid-template-rows: 2.3rem 1fr;
+    grid-template-columns: 1fr 50px;
+    grid-template-areas:
+        'title copyBtn'
+        'copytext copytext';
+
+    width: 100%;
+
+    .copy-panel-title {
+        grid-area: title;
+        background-color: #f2f2f2;
+        font: 400 1.4rem Poppins;
+        border: 1px solid #e3e3e3;
+        border-right: none;
+        padding-left: 5px;
+
+        display: flex;
+        align-items: center;
+    }
+
+    .copy-panel-btn {
+        grid-area: copyBtn;
+        background-color: #f2f2f2;
+        border: 1px solid #e3e3e3;
+
+        font-size: 1.4rem;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        cursor: pointer;
+        user-select: none;
+
+        .not-copied-icon {
+            color: black;
+            font-size: 8px;
+        }
+        .copied-icon {
+            color: white;
+            font-size: 12px;
+        }
+
+        span{
+            margin-left: 3px;
+        }
+    }
+
+    .copied {
+        background-color: green;
+        box-sizing: content-box;
+        border: 1px solid green;
+    }
+
+    .not-copied {
+        transition: all linear 1s;
+    }
+
+    .copy-panel-copy-text {
+        grid-area: copytext;
+        background-color: #fafafa;
+        border: 1px solid #e3e3e3;
+        border-top: none;
+        font: 300 1.3rem Poppins;
+        padding-left: 5px;
+        min-height: 34px;
+
+        display: flex;
+        align-items: center;
+    }
+}

@@ -1,0 +1,38 @@
+$size: 3rem;
+
+.nav-pagination{
+    // width: fit-content;
+    margin-top: 5vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.pagination{
+    height: $size;
+    .page-item{
+        height: 100%;
+        width: $size;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        margin-left: -1px;
+        
+        .page-link {
+            display: flex;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            z-index: 0;
+        }
+        img {
+            height: 100%;
+        }
+        span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}

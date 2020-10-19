@@ -1,0 +1,89 @@
+.profile-wrapper .card-header-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.profile-wrapper .card-header-row img {
+  width: 5rem;
+  max-width: 100px;
+  border-radius: 50%;
+}
+
+.profile-wrapper .card-header-row span {
+  margin-left: 5%;
+  font: var(--text-font-card-title);
+  color: var(--color-card-text-title);
+}
+
+.profile-wrapper .card-header-row .user-name {
+  margin-left: 18%;
+}
+
+.profile-wrapper .card-header-row .title {
+  font-size: 3rem;
+}
+
+.profile-wrapper .main-card-area {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.profile-wrapper .main-card-area .plot {
+  position: relative;
+  width: 80%;
+  height: 20%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: 1px solid grey;
+  margin-top: 3rem;
+  z-index: 0;
+}
+
+.profile-wrapper .main-card-area .plot span {
+  font: var(--text-font-airfoil-name);
+  position: absolute;
+  top: 7%;
+}
+
+.profile-wrapper .main-card-area .buttons-row {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 5%;
+}
+
+.profile-wrapper .main-card-area .buttons-row .all-airfoils {
+  font: var(--text-font-card-paragrath);
+  width: 15rem;
+  height: 3.5rem;
+}

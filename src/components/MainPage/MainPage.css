@@ -1,0 +1,117 @@
+.main-page-wrapper {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 12.3% 1fr;
+      grid-template-rows: 12.3% 1fr;
+      grid-template-areas: "header" "main";
+  background: var(--color-background);
+  height: 100%;
+  width: 100%;
+}
+
+.main-page-wrapper .scrollable-area {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: main;
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+  padding-top: 3vh;
+  justify-self: center;
+}
+
+#removeAllDataConfirmModal {
+  top: 25%;
+}
+
+#removeAllDataConfirmModal .modal-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#removeAllDataConfirmModal .modal-header .modal-title {
+  font-size: 2rem;
+}
+
+#removeAllDataConfirmModal .modal-header .close {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  font-size: 24px;
+}
+
+#removeAllDataConfirmModal .modal-body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 60px;
+  font-size: 1.6rem;
+}
+
+#removeAllDataConfirmModal #delete-all-selection-data-modal-btn {
+  background-color: red;
+  border-color: red;
+}
+
+#removeAllDataConfirmModal .modal-btn {
+  font-size: 1.5rem;
+}
+
+#save-project-dialog-modal {
+  top: 25%;
+}
+
+#save-project-dialog-modal .modal-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#save-project-dialog-modal .modal-header .modal-title {
+  font-size: 2rem;
+}
+
+#save-project-dialog-modal .modal-header .close {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  font-size: 24px;
+}
+
+#save-project-dialog-modal .modal-body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 80px;
+  font-size: 1.6rem;
+}
+
+#save-project-dialog-modal #save-project-modal-btn {
+  background-color: #04E762;
+  border-color: #04E762;
+}

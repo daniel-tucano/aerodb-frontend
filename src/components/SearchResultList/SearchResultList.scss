@@ -1,0 +1,19 @@
+.styled-list{
+    li{
+        height: 4rem;
+        cursor: pointer;
+        .search-result-list-image{
+            position: relative;
+            height: 90%;
+            width: 4rem;
+            margin-right: 1rem;
+            margin-left: 0.5rem;
+            border: 1px solid rgba(0,0,0,0.25);
+        }
+        
+        .search-result-list-text{
+            font: var(--text-font-sidebar-listitems);
+            color: var(--color-card-text-title);
+        }
+    }
+}

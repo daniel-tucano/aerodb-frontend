@@ -1,0 +1,124 @@
+:root {
+  font-size: 60%;
+  --color-primary: #FFC700;
+  --color-secondary: #FFFFFF;
+  --color-background: #F8FBFF;
+  --color-button: #04E762;
+  --color-button-text: #FFFFFF;
+  --color-card: #FFFFFF;
+  --color-card-border: #D7D7D7;
+  --color-card-text-title: #4B4B4B;
+  --color-card-text-paragrath-lighter: #C4C4C4;
+  --color-icon-lighter: rgba(82, 82, 82, 0.26);
+  --text-font-input: 500 1.6rem Raleway;
+  --text-font-button: 500 1.6rem Archivo;
+  --text-font-login-button: 700 1.8rem Poppins;
+  --text-font-login-title: 700 2.3rem Poppins;
+  --text-font-login-paragrath: 500 1.1rem Raleway;
+  --text-font-card-title: 700 2.5rem Raleway;
+  --text-font-card-paragrath: 500 1.6rem Raleway;
+  --text-font-airfoil-name: 700 2rem Raleway;
+  --text-font-sidebar-menu: 400 2.5rem Poppins;
+  --text-font-sidebar-listitems: 300 1.9rem Poppins;
+  --search-bar-height: 5rem;
+  --search-bar-radius: calc(var(--search-bar-height)/2);
+  --search-bar-bottom-radius: calc(var(--search-bar-height)/2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body,
+input,
+button,
+textarea {
+  font: var(--text-font-button);
+}
+
+button, .link-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border: none;
+  border-radius: 7px;
+  text-decoration: none;
+  -webkit-text-emphasis: none;
+          text-emphasis: none;
+  font: var(--text-font-button);
+  background: var(--color-button);
+  color: var(--color-button-text);
+  -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+          box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+}
+
+html, body, #root {
+  height: 100vh;
+}
+
+#root {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.App {
+  height: 100%;
+  width: 100%;
+}
+
+.container {
+  width: 90vw;
+  max-width: 600px;
+}
+
+@media (min-width: 700px) {
+  :root {
+    font-size: 62.5%;
+  }
+}
+
+@media (max-width: 600px) {
+  :root {
+    font-size: 50%;
+  }
+}
+
+@media (max-width: 500px) {
+  :root {
+    font-size: 47.5%;
+  }
+}
+
+@media (max-width: 400px) {
+  :root {
+    font-size: 45%;
+  }
+}
+
+@media (max-width: 375px) {
+  :root {
+    font-size: 42.5%;
+  }
+}
+
+@media (max-width: 350px) {
+  :root {
+    font-size: 40%;
+  }
+}

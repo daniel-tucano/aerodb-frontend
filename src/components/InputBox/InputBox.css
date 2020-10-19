@@ -1,0 +1,27 @@
+.input-box {
+  position: relative;
+  margin-top: 1rem;
+}
+
+.input-box img {
+  position: absolute;
+  height: 2rem;
+  top: 50%;
+  left: 1.5rem;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+.input-box input {
+  background-color: white;
+  border-radius: var(--search-bar-radius);
+  width: 100%;
+  height: var(--search-bar-height);
+  padding-left: 4rem;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  font: var(--text-font-input);
+}
+
+.input-box input:focus {
+  outline: none;
+}

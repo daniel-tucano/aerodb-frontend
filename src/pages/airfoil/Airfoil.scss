@@ -1,0 +1,696 @@
+.airfoil-card-header {
+    display: flex;
+
+    .favorite-btn {
+        background-color: transparent;
+        box-shadow: none;
+        outline: none;
+    }
+    .favorite-icon {
+        color: #00adef;
+    }
+
+    span {
+        margin-left: 10px;
+    }
+}
+
+.airfoil-plot {
+    .card-section-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .show {
+            width: 100%;
+            padding: 2% 2%;
+        }
+    }
+}
+
+.airfoil-card-wrapper {
+    .posted-by-row {
+        margin-left: 10px;
+
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 11px;
+        line-height: 16px;
+
+        display: flex;
+        align-items: center;
+        letter-spacing: -0.01em;
+
+        color: #635a5a;
+
+        .posted-by-link {
+            color: #007bff;
+            cursor: pointer;
+        }
+
+        .posted-by-link:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .airfoil-characteristics {
+        .characteristic {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            .characteristic-header {
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 11px;
+                line-height: 16px;
+                /* identical to box height */
+
+                display: flex;
+                align-items: center;
+                letter-spacing: -0.01em;
+
+                color: #635a5a;
+            }
+            .characteristic-detail {
+                margin: 2% 1%;
+
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: 300;
+                font-size: 11px;
+                line-height: 16px;
+                display: flex;
+                align-items: center;
+                text-align: center;
+                letter-spacing: 0.09em;
+
+                color: #635a5a;
+            }
+        }
+    }
+
+    .get-geometrie {
+        .card-section-content {
+            .show {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    }
+}
+
+.runs-card {
+    .runs-card-plot {
+        .card-section-content {
+            .show {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        .active-plots-list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+
+            .active-plots-list-header {
+                width: 80%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                padding: 2% 3%;
+                margin: 0 10%;
+
+                border-bottom: 1px solid #d7d7d7;
+
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 1.5rem;
+                line-height: 16px;
+                /* identical to box height */
+
+                display: flex;
+                align-items: center;
+                text-align: center;
+                letter-spacing: -0.01em;
+
+                color: #635a5a;
+            }
+
+            .active-plots-list-details {
+                .run-item {
+                    position: relative;
+                    height: 2.8rem;
+                    display: flex;
+                    align-items: center;
+
+                    padding: 0 11%;
+
+                    .remove-run-item-btn {
+                        position: absolute;
+                        transform: translateX(-120%);
+
+                        .remove-ploted-run {
+                            font-size: 1.8rem;
+                            cursor: pointer;
+                        }
+                    }
+
+                    .information-area {
+                        width: 100%;
+                        display: flex;
+                        justify-content: space-between;
+                        padding: 0 3%;
+
+                        .run-item-information {
+                            display: flex;
+                            width: 33.33%;
+
+                            font-family: Poppins;
+                            font-style: normal;
+                            font-weight: 300;
+                            font-size: 1.53rem;
+                            line-height: 16px;
+                            display: flex;
+                            align-items: center;
+                            text-align: center;
+                            letter-spacing: 0.09em;
+
+                            color: #635a5a;
+                        }
+
+                        #run-item-reynolds {
+                            justify-content: center;
+                        }
+
+                        #run-item-mach {
+                            justify-content: flex-end;
+                        }
+                    }
+                }
+            }
+        }
+
+        .plot-type-control-row {
+            width: 80%;
+            height: 2.8rem;
+            display: flex;
+
+            margin-top: 4.2rem;
+
+            .plot-type-control-btn {
+                width: 33.33%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 1.4rem;
+                line-height: 15px;
+                display: flex;
+                align-items: center;
+                text-align: center;
+                letter-spacing: -0.01em;
+
+                color: #635a5a;
+            }
+
+            .selected {
+                background-color: var(--color-primary);
+                color: white;
+            }
+
+            #cl {
+                border-top: 1.8px solid #d7d7d7;
+                border-bottom: 1.8px solid #d7d7d7;
+                border-left: 1.8px solid #d7d7d7;
+                border-top-left-radius: 6px;
+                border-bottom-left-radius: 6px;
+            }
+            #cd {
+                border: 1.8px solid #d7d7d7;
+            }
+            #cm {
+                border-top: 1.8px solid #d7d7d7;
+                border-bottom: 1.8px solid #d7d7d7;
+                border-right: 1.8px solid #d7d7d7;
+                border-top-right-radius: 6px;
+                border-bottom-right-radius: 6px;
+            }
+        }
+
+        .runs-plot-area {
+            width: 100%;
+            height: 23rem;
+            display: flex;
+            justify-content: center;
+
+            margin: 5rem 0;
+        }
+    }
+
+    .runs-polar-properties {
+        .show {
+            padding: 0;
+        }
+        .ploted-run-polar-properties {
+            .ploted-run-polar-properties-header {
+                height: 2.5rem;
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 1.7rem;
+                line-height: 16px;
+                /* identical to box height */
+
+                padding-left: 2%;
+
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                letter-spacing: -0.01em;
+
+                cursor: pointer;
+
+                color: #ffffff;
+
+                .collapse-icon {
+                    font-size: 2rem;
+                    color: #ffffff;
+                    margin-right: 0.7%;
+                }
+            }
+
+            .ploted-run-polar-properties-details {
+                .show {
+                    width: 100%;
+                    display: flex;
+                    flex-wrap: wrap;
+                    padding-top: 1.5rem;
+                    padding-bottom: 1.5rem;
+
+                    .propertie-wrapper {
+                        width: 25%;
+                        height: 50px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-around;
+                        align-items: center;
+
+                        margin: 0.5rem 0;
+
+                        .propertie-header {
+                            font-family: Poppins;
+                            font-style: normal;
+                            font-weight: 500;
+                            font-size: 1.55rem;
+                            line-height: 16px;
+                            /* identical to box height */
+
+                            display: flex;
+                            align-items: center;
+                            letter-spacing: -0.01em;
+
+                            color: #635a5a;
+                        }
+
+                        .propertie-detail {
+                            font-family: Poppins;
+                            font-style: normal;
+                            font-weight: 300;
+                            font-size: 1.55rem;
+                            line-height: 16px;
+                            display: flex;
+                            align-items: center;
+                            text-align: center;
+                            letter-spacing: 0.09em;
+
+                            color: #635a5a;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .runs-card-filter {
+        .add-filter-row {
+            height: 2rem;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-around;
+
+            box-sizing: border-box;
+            margin: 2rem 0;
+
+            .add-filter-btn {
+                position: relative;
+                width: 10rem;
+                height: 2.8rem;
+                display: flex;
+                align-content: center;
+                justify-content: center;
+                cursor: pointer;
+
+                padding-left: 3%;
+
+                border: 1px solid #00adef;
+                border-radius: 3px;
+                box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+                span {
+                    font-family: Poppins;
+                    font-style: normal;
+                    font-weight: 300;
+                    font-size: 1.4rem;
+                    line-height: 15px;
+                    /* identical to box height */
+
+                    display: flex;
+                    align-items: center;
+                    letter-spacing: -0.06em;
+
+                    color: #00adef;
+                }
+
+                .add-filter-icon {
+                    position: absolute;
+                    left: 4%;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    font-size: 1.8rem;
+                    color: #00adef;
+                }
+            }
+
+            .add-filter-input {
+                .add-filter-dropdown-value {
+                    width: 10rem;
+                    height: 2.8rem;
+
+                    padding-left: 7%;
+                    padding-right: 5%;
+
+                    border: 0.5px solid #dee2e6;
+                    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+                    border-radius: 3px;
+                }
+            }
+        }
+
+        .active-filters {
+            .active-filter {
+                height: 2.8rem;
+                width: fit-content;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                border: 0.5px solid #635a5a;
+                box-sizing: border-box;
+                box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+                border-radius: 0.42rem;
+
+                margin-top: 3rem;
+                margin-bottom: 2rem;
+                margin-left: 3%;
+                padding: 0 0.9rem;
+
+                .active-filter-text {
+                    font-family: Poppins;
+                    font-style: normal;
+                    font-weight: 300;
+                    font-size: 1.4rem;
+                    line-height: 15px;
+                    color: #635a5a;
+                }
+
+                .active-filter-type {
+                    margin: 0 0.7rem;
+                }
+
+                .ative-filter-icon {
+                    font-size: 1.7rem;
+                    color: #ed474a;
+                    margin-left: 0.4rem;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .runs-card-results {
+        .card-section-content {
+            padding: 0;
+        }
+
+        .show {
+            padding: 0;
+        }
+
+        .controls-row {
+            display: flex;
+            margin-bottom: 5rem;
+
+            .result-control-btn {
+                position: relative;
+                display: flex;
+                width: 50%;
+                height: 3.8rem;
+                justify-content: flex-start;
+                align-items: center;
+                padding-left: 15px;
+                cursor: pointer;
+
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 1.4rem;
+                line-height: 15px;
+                display: flex;
+                align-items: center;
+                text-align: center;
+                letter-spacing: -0.02em;
+
+                color: #ffffff;
+
+                .result-control-btn-icon {
+                    font-size: 2.3rem;
+                }
+
+                .result-control-btn-text {
+                    position: absolute;
+                    width: 100%;
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+            }
+
+            #select-all-results {
+                background-color: #00adef;
+            }
+
+            #unselect-all-results {
+                background-color: #ed474a;
+            }
+        }
+
+        .run-results-list {
+            .run-result-item {
+                .add-remove-run-result-icon {
+                    font-size: 3.3rem;
+                    cursor: pointer;
+                    color: #635a5a;
+                }
+
+                .run-result-item-header {
+                    width: 100%;
+                    height: 5.5rem;
+                    display: flex;
+                    align-items: center;
+                    padding-left: 3%;
+                    cursor: pointer;
+
+                    border-bottom: 1px solid #d7d7d7;
+                    .click-area {
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        justify-content: space-around;
+                        align-items: center;
+                        color: #635a5a;
+
+                        .run-name {
+                            font-family: Poppins;
+                            font-style: normal;
+                            font-weight: normal;
+                            font-size: 2.5rem;
+                            line-height: 27px;
+                            /* identical to box height */
+
+                            display: flex;
+                            align-items: center;
+                            letter-spacing: -0.06em;
+                        }
+
+                        .column-information {
+                            height: 100%;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: space-around;
+
+                            .column-information-header {
+                                font-family: Poppins;
+                                font-style: normal;
+                                font-weight: 600;
+                                font-size: 1.53rem;
+                                line-height: 16px;
+                                display: flex;
+                                align-items: center;
+                                text-align: center;
+                                letter-spacing: -0.01em;
+                            }
+
+                            .column-information-detail {
+                                font-family: Poppins;
+                                font-style: normal;
+                                font-weight: 300;
+                                font-size: 1.53rem;
+                                line-height: 16px;
+                                display: flex;
+                                align-items: center;
+                                text-align: center;
+                                letter-spacing: 0.09em;
+                            }
+                        }
+                    }
+                }
+
+                .run-result-item-options {
+                    .collapse {
+                        display: initial;
+                        .run-result-item-option {
+                            transition: all 0.2s ease-in-out;
+                            height: 0;
+                            overflow: hidden;
+
+                            display: flex;
+                            align-items: center;
+                            transform: translateY(-1px);
+
+                            .option-icon {
+                                font-size: 2.3rem;
+                                color: white;
+                                margin-left: 2.1rem;
+                            }
+
+                            .option-detail {
+                                position: absolute;
+                                width: 100%;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+
+                                font-family: Poppins;
+                                font-style: normal;
+                                font-weight: 600;
+                                font-size: 1.4rem;
+                                line-height: 15px;
+                                display: flex;
+                                align-items: center;
+                                text-align: center;
+                                letter-spacing: -0.02em;
+
+                                color: #ffffff;
+                            }
+                        }
+
+                        #add-to-comparisson {
+                            background-color: #007bff;
+                        }
+
+                        #remove-from-comparisson {
+                            background-color: red;
+                        }
+
+                        #view-details {
+                            background-color: #04e762;
+                        }
+                    }
+                    .show {
+                        .run-result-item-option {
+                            position: relative;
+                            height: 4.2rem;
+
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+
+            .run-result-item:first-of-type {
+                border-top: 1px solid #d7d7d7;
+            }
+
+            .opened {
+                background-color: var(--color-primary);
+                .add-remove-run-result-icon {
+                    color: white;
+                }
+                .click-area {
+                    .run-name {
+                        color: white;
+                    }
+                    .column-information {
+                        color: white;
+                    }
+                }
+            }
+
+            .closed {
+                background-color: rgb(248, 252, 255);
+            }
+        }
+    }
+
+    .pagination-nav-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        margin-top: 20px;
+
+        .change-page-btn {
+            height: 3.5rem;
+            background-color: var(--color-primary);
+            // border: 3px solid var(--color-primary);
+            border-radius: 0.4rem;
+            cursor: pointer;
+
+            padding: 3px 1rem;
+            box-shadow: 2px 2px 2px #d7d7d7;
+
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 2rem;
+            line-height: 16px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            letter-spacing: -0.01em;
+            color: white;
+        }
+    }
+}

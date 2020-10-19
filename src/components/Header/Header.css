@@ -1,0 +1,52 @@
+.header {
+  position: fixed;
+  display: -ms-grid;
+  display: grid;
+  grid-area: header;
+  top: 0;
+  height: 12.3%;
+  width: 100%;
+  background-color: var(--color-primary);
+  z-index: 2;
+}
+
+.header button {
+  position: absolute;
+  width: 20%;
+  height: 20%;
+  bottom: 25%;
+  left: 0;
+  max-width: 100px;
+  min-height: 25px;
+  background: transparent;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  border: none;
+}
+
+.header button img {
+  width: 100%;
+  height: 100%;
+}
+
+.header .logo-nome {
+  position: absolute;
+  bottom: 20%;
+  height: 45%;
+  max-height: 45px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+
+.header .open-right-side-bar-btn {
+  position: absolute;
+  bottom: 9%;
+  right: 3%;
+  cursor: pointer;
+}
+
+.header .open-right-side-bar-btn .open-right-side-bar-icon {
+  color: var(--color-secondary);
+  font-size: 45px;
+}

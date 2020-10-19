@@ -1,0 +1,77 @@
+.search-bar-wrapper {
+    position: relative;
+    width: 90%;
+
+    .search-input-wrapper {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        z-index: 0;
+
+        .search-input {
+            position: absolute;
+            height: var(--search-bar-height);
+            // border-radius: var(--search-bar-radius);
+            width: 100%;
+            border: 1px solid rgba(0, 0, 0, 0.25);
+            z-index: 1;
+
+        }
+
+        img {
+            position: absolute;
+            left: 2%;
+        }
+    }
+
+    .react-autosuggest__suggestions-list {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+    }
+
+    .react-autosuggest__suggestion {
+        cursor: pointer;
+        padding: 0.6rem 0;
+        border-top: 1px solid rgba(0, 0, 0, 0.25);
+        font: var(--text-font-input);
+        height: 4.5rem;
+    }
+
+    .react-autosuggest__suggestions-container--open {
+        display: block;
+        position: absolute;
+        top: 90%;
+        width: 100%;
+        border: 1px solid rgba(0, 0, 0, 0.25);
+        background-color: #fff;
+        font-family: Helvetica, sans-serif;
+        font-weight: 300;
+        font-size: 16px;
+        border-top: none;
+        border-bottom-left-radius: var(--search-bar-bottom-radius);
+        border-bottom-right-radius: var(--search-bar-bottom-radius);
+        z-index: 1;
+    }
+    .react-autosuggest__suggestion--first {
+        border-top: 1px solid rgba(0, 0, 0, 0.25);
+        // padding-top: 0rem;
+        margin-top: 0;
+    }
+
+    .react-autosuggest__input--open {
+        border-bottom: none;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    
+    .react-autosuggest__suggestion--highlighted {
+        background-color: rgba(0, 0, 0, 0.10);
+    }
+
+    .react-autosuggest__suggestion--highlighted:last-child {
+        border-bottom-left-radius: var(--search-bar-bottom-radius);
+        border-bottom-right-radius: var(--search-bar-bottom-radius);
+    }
+}

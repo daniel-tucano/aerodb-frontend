@@ -1,0 +1,49 @@
+.header {
+    position: fixed;
+    display: grid;
+    grid-area: header;
+    top: 0;
+    height: 12.3%;
+    width: 100%;
+    background-color: var(--color-primary);
+    z-index: 2;
+    button {
+        position: absolute;
+        width: 20%;
+        height: 20%;
+        bottom: 25%;
+        left: 0;
+        max-width: 100px;
+        min-height: 25px;
+        background: transparent;
+        box-shadow: none;
+        border: none;
+        
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .logo-nome {
+        position: absolute;
+        bottom: 20%;
+        height: 45%;
+        max-height: 45px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .open-right-side-bar-btn {
+        position: absolute;
+        bottom: 9%;
+        right: 3%;
+
+        cursor: pointer;
+        
+        .open-right-side-bar-icon{
+            color: var(--color-secondary);
+            font-size: 45px;
+        }
+    }
+}

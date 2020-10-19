@@ -1,0 +1,442 @@
+.right-side-bar-wrapper {
+    position: fixed;
+    right: 0;
+    height: 100vh;
+    width: 50%;
+    max-width: 300px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+    transform: translateX(110%);
+    transition: all ease-in-out 0.5s;
+    box-shadow: -2px 2px 2px rgba(0, 0, 0, 0.25);
+    z-index: 5;
+
+    display: grid;
+    grid-template-rows: 15% 1fr 15%;
+    grid-template-areas:
+        "header"
+        "main"
+        "footer";
+
+    .right-side-bar-header {
+        grid-area: header;
+        position: relative;
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        background-color: var(--color-secondary);
+        border: 1px solid #a5a5a5;
+
+        .side-bar-title-row {
+            position: relative;
+            height: 100%;
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+
+            .side-bar-title-text {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 2.6rem;
+                line-height: 30px;
+                color: #635a5a;
+            }
+
+            .right-side-bar-close-icon {
+                font-size: 26px;
+                color: #635a5a;
+                margin-right: 4%;
+                cursor: pointer;
+            }
+        }
+
+        .current-project-row {
+            width: 100%;
+            height: 4.2rem;
+
+            padding-right: 1%;
+
+            display: flex;
+            align-items: center;
+
+            border-top: 1px solid #a5a5a5;
+
+            .current-project-name {
+                width: 100%;
+                height: 100%;
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 2.6rem;
+                line-height: 30px;
+                color: #635a5a;
+                /* identical to box height */
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                letter-spacing: -0.06em;
+            }
+
+            .project-row-icon {
+                margin: 0 3px;
+                font-size: 3.34rem;
+                cursor: pointer;
+                color: #635a5a;
+            }
+        }
+    }
+
+    .right-side-bar-main {
+        grid-area: main;
+        width: 100%;
+        overflow-y: scroll;
+
+        background-color: #f9f9f9;
+        border-left: 1px solid #a5a5a5;
+        border-right: 1px solid #a5a5a5;
+    }
+    
+    /* width */
+    ::-webkit-scrollbar {
+        width: 0.7rem;
+        scroll-behavior: smooth;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: rgba(136, 136, 136, 0.185);
+        border-radius: 5px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: rgba(136, 136, 136, 0.514);
+    }
+
+    .right-side-bar-footer {
+        grid-area: footer;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .delete-all-selection-btn {
+            position: relative;
+            background-color: #ed474a;
+            width: 100%;
+            height: 50px;
+
+            display: flex;
+            align-items: center;
+
+            cursor: pointer;
+
+            .delete-all-selection-icon {
+                color: white;
+                font-size: 15px;
+
+                margin-left: 4%;
+            }
+
+            span {
+                position: absolute;
+                justify-self: center;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 1.5rem;
+                line-height: 15px;
+                text-align: center;
+                letter-spacing: -0.02em;
+                color: white;
+            }
+        }
+
+        .right-side-bar-footer-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-color: var(--color-secondary);
+            border: 1px solid #a5a5a5;
+            border-top: none;
+
+            .download-selected-data-btn {
+                width: 100%;
+                height: 100%;
+
+                cursor: pointer;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                span {
+                    height: 25%;
+
+                    font-family: Poppins;
+                    font-style: normal;
+                    font-weight: normal;
+                    font-size: 1.8rem;
+                    line-height: 30px;
+                    letter-spacing: -0.06em;
+
+                    display: flex;
+                    align-items: center;
+
+                    color: #635a5a;
+
+                    .download-selected-data-icon {
+                        font-size: 23px;
+                        color: #635a5a;
+                        margin-left: 15px;
+                    }
+                }
+            }
+
+            .download-selected-data-btn:hover {
+                background-color: #04e763;
+                span {
+                    color: white;
+                    .download-selected-data-icon {
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.open {
+    transform: translateX(0);
+}
+
+.airfoil-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    width: 100%;
+
+    .airfoil-list-item {
+        .airfoil-list-item-header {
+            width: 100%;
+            height: 4.45rem;
+
+            background-color: var(--color-primary);
+
+            display: flex;
+            align-items: center;
+
+            .airfoil-geometrie {
+                width: 4.72rem;
+                height: 100%;
+                margin: 0 3%;
+            }
+
+            .header-title {
+                width: 100%;
+                margin-left: 3%;
+
+                font-family: Poppins;
+                font-style: normal;
+                font-weight: bold;
+                font-size: 1.4rem;
+                line-height: 21px;
+                /* identical to box height */
+
+                display: flex;
+                align-items: center;
+                letter-spacing: -0.01em;
+
+                color: #ffffff;
+            }
+
+            .airfoil-list-item-options {
+                position: relative;
+                width: 3.34rem;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                box-sizing: content-box;
+
+                .item-options-icon {
+                    font-size: 3.34rem;
+                    color: var(--color-secondary);
+                    margin: 0 2.5px;
+                    cursor: pointer;
+                }
+
+                .airfoil-options {
+                    position: absolute;
+                    top: 103%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    z-index: 6;
+
+                    .visit-airfoil {
+                        background-color: #04e763;
+                    }
+                    .remove-airfoil {
+                        background-color: #ed474a;
+                    }
+
+                    .airfoil-option {
+                        width: 110%;
+                        height: 3rem;
+                        cursor: pointer;
+                        list-style-type: none;
+                        display: flex;
+                        justify-content: space-around;
+                        align-items: center;
+                        span {
+                            width: 100%;
+                            font-family: Poppins;
+                            font-style: normal;
+                            font-weight: bold;
+                            font-size: 14px;
+                            color: white;
+
+                            padding: 0 5%;
+
+                            display: flex;
+                            justify-content: center;
+                        }
+                    }
+
+                    .airfoil-options-icon {
+                        font-size: 2.1rem;
+                        color: white;
+                        margin-left: 3%;
+                    }
+                }
+            }
+
+            .open-close-collapse-icon {
+                font-size: 3.34rem;
+                color: var(--color-secondary);
+                margin: 0 2.5px;
+                cursor: pointer;
+            }
+        }
+
+        .airfoil-list-item-content {
+            width: 100%;
+
+            .run-list {
+                .run-list-item {
+                    width: 100%;
+                    height: 4.45rem;
+                    display: grid;
+                    grid-template-columns: 15% 1fr 55%;
+                    grid-template-areas: "removeIcon runName runInfo";
+
+                    border-top: 1px solid #a5a5a5;
+
+                    .remove-selected-run-btn {
+                        grid-area: removeIcon;
+                        display: flex;
+                        align-items: center;
+                        cursor: pointer;
+                        .remove-selected-run-icon {
+                            font-size: 3.34rem;
+                            color: #635a5a;
+                            margin-left: 5px;
+                            cursor: pointer;
+                        }
+                    }
+
+                    .run-name {
+                        grid-area: runName;
+                        font-family: Poppins;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: 1.6rem;
+                        line-height: 18px;
+                        display: flex;
+                        align-items: center;
+                        letter-spacing: -0.06em;
+
+                        color: #635a5a;
+                    }
+
+                    .run-info {
+                        grid-area: runInfo;
+                        display: flex;
+                        justify-content: space-around;
+                        // width: 55%;
+
+                        .mach-info {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: space-around;
+                        }
+
+                        .reynolds-info {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: space-around;
+                        }
+
+                        .info-title {
+                            font-family: Poppins;
+                            font-style: normal;
+                            font-weight: 600;
+                            font-size: 1.1rem;
+                            line-height: 12px;
+                            display: flex;
+                            align-items: center;
+                            text-align: center;
+                            letter-spacing: -0.01em;
+
+                            color: #635a5a;
+                        }
+
+                        .info {
+                            font-family: Poppins;
+                            font-style: normal;
+                            font-weight: 300;
+                            font-size: 1.1rem;
+                            line-height: 12px;
+                            display: flex;
+                            align-items: center;
+                            text-align: center;
+                            letter-spacing: 0.09em;
+
+                            color: #635a5a;
+                        }
+                    }
+                }
+                .collapse:last-child {
+                    .run-list-item:last-of-type {
+                        border-bottom: 1px solid #a5a5a5;
+                    }
+                }
+            }
+        }
+    }
+}
