@@ -7,7 +7,7 @@ import queryString from 'query-string'
 
 import SearchBar from '../../components/SearchBar'
 import PaginationNav from '../../components/PaginationNav'
-import { UserData } from '../../contexts/auth'
+import { UserDataType } from '../../api/aerodbApi'
 
 import './SearchPage.css'
 
@@ -32,7 +32,7 @@ type SearchPageProps = {
     pagesInNav?: number,
     handleDocsFunction: (docs: firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>[]) => object,
     userRef?: firebase.firestore.DocumentReference<firebase.firestore.DocumentData>,
-    userData?: UserData,
+    userData?: UserDataType,
     baseQuery?: firebase.firestore.Query<firebase.firestore.DocumentData> | firebase.firestore.CollectionReference<firebase.firestore.DocumentData>,
     itensPerPage?: number,
     onSearchResultItensChange: (searchResultItens: object) => {}

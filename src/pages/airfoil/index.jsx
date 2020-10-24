@@ -3,15 +3,14 @@ import AuthContext from '../../contexts/auth'
 import { useHistory } from 'react-router-dom'
 import { Line } from 'react-chartjs-2'
 import { saveAs } from 'file-saver'
+import { airfoilAPI, runAPI, userAPI } from '../../api/aerodbApi'
+import { QueryBuilder } from 'odata-query-builder'
 
 import Card from '../../components/Card'
 import CardSection from '../../components/Card/CardSection'
 import CopyPanel from '../../components/CopyPanel'
 import DownloadButton from '../../components/DownloadButton'
 import FilterDropdown from '../../components/FilterDropdown'
-
-import { db } from '../../firebase/fireApp'
-import * as firebase from 'firebase/app'
 
 import toCamelCase from '../../functions/toCamelCase'
 import formatSelig from '../../functions/formatSelig'
@@ -43,8 +42,9 @@ const AirfoilCard = ({ airfoilId }) => {
     const history = useHistory()
 
     useEffect(() => {
-        db.doc(`airfoils/${airfoilId}`).get().then((result) => {
-            setCurrentAirfoil(result.data())
+        airfoilAPI.getOneAirfoil(airfoilId).then((airfoilResponse) => {
+            airfoilResponse.data.postedDate = new Date(airfoilResponse.data.postedDate)
+            setCurrentAirfoil(airfoilResponse.data)
             setIsAirfoilFetched(true)
         })
     }, [airfoilId])
@@ -116,9 +116,7 @@ const AirfoilCard = ({ airfoilId }) => {
 
             if (isLogged) {
                 setIsFavorite(currentValue => {
-                    userRef.update({
-                        favoriteAirfoils: !currentValue ? firebase.firestore.FieldValue.arrayUnion(airfoilId) : firebase.firestore.FieldValue.arrayRemove(airfoilId)
-                    }).then(() => console.log(`${!currentValue ? 'added' : 'removed'} ${airfoilId} ${!currentValue ? 'to' : 'from'} favoriteAirfoils from user ${userRef.id}`))
+                    userAPI.updateUser(userRef)
                     return !currentValue
                 })
             } else {
@@ -132,7 +130,7 @@ const AirfoilCard = ({ airfoilId }) => {
             <div className="airfoil-card-wrapper">
                 <div className="posted-by-row">
                     <span>
-                        Posted by <span className="posted-by-link" onClick={() => history.push(`/user/${currentAirfoil.creator.ref.id}`)}>{currentAirfoil.creator.userName}</span> on <span className="posted-date">{currentAirfoil.postedDate.toDate().toDateString()}</span>
+                        Posted by <span className="posted-by-link" onClick={() => history.push(`/user/${currentAirfoil.creator}`)}>{currentAirfoil.creator.userName}</span> on <span className="posted-date">{currentAirfoil.postedDate.toDateString()}</span>
                     </span>
                 </div>
                 <Card
@@ -232,65 +230,72 @@ const RunsCard = ({ airfoilId }) => {
     const [filtersList, setFiltersList] = useState([])
     const [currentFilterValues, setCurrentFilterValues] = useState({ field: { key: 'field', value: '' }, type: { key: 'type', value: '' }, value: '' })
 
-    const [paginationVariables, setPaginationVariables] = useState({ firstDocument: {}, lastDocument: {}, currentDbQuery: db.collection(`airfoils/${airfoilId}/runs`), nPages: 1, itensPerPage: 5, currentPage: 1 })
+    const [paginationVariables, setPaginationVariables] = useState({ nPages: 1, itensPerPage: 5, totalPages: undefined, page: 1, nextPage: 2, prevPage: null, hasNextPage: true, hasPrevPage: false, totalDocs: undefined, query: {} })
 
     const colorOrder = [[0, 0.447, 0.7410], [0, 0.85, 0.325, 0.0980], [0.929, 0.6940, 0.125], [0.4940, 0.1840, 0.5560], [0.4660, 0.6740, 0.1880], [0.3010, 0.7450, 0.9330], [0.6350, 0.0780, 0.1840]]
 
-    const allFields = [{ key: '<', value: '<' }, { key: '<=', value: '<=' }, { key: '==', value: '==' }, { key: '>=', value: '>=' }, { key: '>', value: '>' }]
+    const allFields = [{ key: '<', value: 'lt' }, { key: '<=', value: 'le' }, { key: '==', value: 'eq' }, { key: '>=', value: 'ge' }, { key: '>', value: 'gt' }]
 
     useEffect(() => {
 
-        db.collection(`airfoils/${airfoilId}/runs`).limit(5).get().then((results) => {
-            handleDocs(results)
+        const query = new QueryBuilder().filter( f => f.filterExpression('airfoilID','eq',airfoilId))
+
+        runAPI.getRunsPage(query ,{page:1, limit: 5}).then( runsResponse =>  {
+            const {limit, paginingCounter, docs, ...runsPaginationData} = runsResponse.data
+            setPaginationVariables(currentValue => { return {...currentValue, query, ...runsPaginationData} })
+            setcurrentResultRuns(docs)
         })
 
     }, [airfoilId])
 
     useEffect(() => {
-        let currentQuery = db.collection(`airfoils/${airfoilId}/runs`)
 
-        filtersList.map(filter => currentQuery = addWhereToQuery(currentQuery, filter.field.value, filter.type.value, filter.value))
+        if (filtersList.length === 0) return
 
-        currentQuery.limit(paginationVariables.itensPerPage).get().then(results => {
-            handleDocs(results)
+        const query = new QueryBuilder()
+        
+        query.filter(f => filtersList.reduce( (acu, filter) => acu.filterExpression(filter.field.value, filter.type.value, filter.value),f),'and')
+
+        runAPI.getRunsPage(query, { limit: paginationVariables.itensPerPage }).then( runsResponse => {
+            const {limit, paginingCounter, docs, ...runsPaginationData} = runsResponse.data
+            setPaginationVariables(currentValue => { return {...currentValue, query, ...runsPaginationData} })
+            setcurrentResultRuns(docs)
         })
 
-        setPaginationVariables(currentData => { return { ...currentData, currentDbQuery: currentQuery } })
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [airfoilId, filtersList, paginationVariables.itensPerPage])
 
     const handleRunAddRemove = (run) => {
-        if (includesRun(run.id, airfoilId)) {
+        if (includesRun(run.runID, airfoilId)) {
             // Remove
-            removeRunData(run.id, airfoilId)
+            removeRunData(run.runID, airfoilId)
         } else {
             // Add
             if (!includesAirfoil(airfoilId)) {
-                db.doc(`airfoils/${airfoilId}`).get().then(airfoil => {
-                    const airfoilData = airfoil.data()
-                    addAirfoilData({ id: airfoil.id, name: airfoilData.name, geometrie: airfoilData.geometrie, runsData: [] })
-                    addRunData({ id: run.id, name: `Run ${run.id}`, mach: run.mach, reynolds: run.reynolds }, airfoilId)
+                airfoilAPI.getOneAirfoil(airfoilId).then( airfoilResponse => {
+                    addAirfoilData({ airfoilID: airfoilId, name: airfoilResponse.data.name, geometrie: airfoilResponse.data.geometrie, runsData: [] })
+                    addRunData({ runID: run.runID, name: `Run ${run.runID}`, mach: run.mach, reynolds: run.reynolds }, airfoilId)
                 })
             } else {
-                addRunData({ id: run.id, name: `Run ${run.id}`, mach: run.mach, reynolds: run.reynolds }, airfoilId)
+                addRunData({ runID: run.runID, name: `Run ${run.runID}`, mach: run.mach, reynolds: run.reynolds }, airfoilId)
             }
         }
     }
 
     const handleSelectAllResults = () => {
         if (!includesAirfoil(airfoilId)) {
-            db.doc(`airfoils/${airfoilId}`).get().then(airfoil => {
-                const airfoilData = airfoil.data()
-                addAirfoilData({ id: airfoil.id, name: airfoilData.name, geometrie: airfoilData.geometrie, runsData: [] })
+            airfoilAPI.getOneAirfoil(airfoilId).then(airfoil => {
+                const airfoilData = airfoil.data
+                addAirfoilData({ airfoilID: airfoilData.airfoilID, name: airfoilData.name, geometrie: airfoilData.geometrie, runsData: [] })
             })
         }
 
-        currentResultRuns.map(run => addRunData({ id: run.id, name: `Run ${run.id}`, mach: run.mach, reynolds: run.reynolds }, airfoilId))
+        currentResultRuns.map(run => addRunData({ runID: run.runID, name: `Run ${run.runID}`, mach: run.mach, reynolds: run.reynolds }, airfoilId))
     }
 
     const handleUnselectAllResults = () => {
-        currentResultRuns.map(run => removeRunData(run.id, airfoilId))
+        currentResultRuns.map(run => removeRunData(run.runID, airfoilId))
     }
 
     const handleAddFilter = () => {
@@ -373,58 +378,35 @@ const RunsCard = ({ airfoilId }) => {
         setOpenedCollapseIndex(-1)
 
         if (actionType === 'next') {
+            if(!paginationVariables.hasNextPage) return
 
-            paginationVariables.currentDbQuery.startAfter(paginationVariables.lastDocument).limit(paginationVariables.itensPerPage).get().then((results) => {
-                const tmpRunData = []
-
-                results.docs.map((run) => tmpRunData.push({ ...run.data(), id: run.id }))
-
-                setcurrentResultRuns(tmpRunData)
-                setPaginationVariables((currentValue) => { return { ...currentValue, firstDocument: results.docs[0], lastDocument: results.docs.pop() } })
+            runAPI.getRunsPage(paginationVariables.query, { page: paginationVariables.nextPage, limit: paginationVariables.itensPerPage}).then( runsResponse => {
+                const {limit, paginingCounter, docs, ...runsPaginationData} = runsResponse.data
+                setPaginationVariables(currentValue => {
+                    runsPaginationData.query = currentValue.query
+                    runsPaginationData.itensPerPage = currentValue.itensPerPage
+                    return runsPaginationData
+                })
+                setcurrentResultRuns(docs)
             })
-
-            setPaginationVariables(currentValue => { return { ...currentValue, currentPage: currentValue.currentPage + 1 } })
 
         } else if (actionType === 'previous') {
-            if (paginationVariables.currentPage === 1) return
+            if (!paginationVariables.hasPrevPage) return
 
-            paginationVariables.currentDbQuery.orderBy('id', 'asc').endBefore(paginationVariables.firstDocument).limitToLast(paginationVariables.itensPerPage).get().then((results) => {
-                const tmpRunData = []
-
-                results.docs.map((run) => tmpRunData.push({ ...run.data(), id: run.id }))
-
-                setcurrentResultRuns(tmpRunData)
-                setPaginationVariables((currentValue) => { return { ...currentValue, firstDocument: results.docs[0], lastDocument: results.docs.pop() } })
+            runAPI.getRunsPage(paginationVariables.query, { page: paginationVariables.prevPage, limit: paginationVariables.itensPerPage}).then( runsResponse => {
+                const {limit, paginingCounter, docs, ...runsPaginationData} = runsResponse.data
+                setPaginationVariables(currentValue => {
+                    runsPaginationData.query = currentValue.query
+                    runsPaginationData.itensPerPage = currentValue.itensPerPage
+                    return runsPaginationData
+                })
+                setcurrentResultRuns(docs)
             })
-
-            setPaginationVariables(currentValue => { return { ...currentValue, currentPage: currentValue.currentPage - 1 } })
-        }
-    }
-
-    const addWhereToQuery = (collectionInstance, searchField, searchType, searchValue) => {
-
-        if (isNumeric(searchValue)) {
-            searchValue = parseFloat(searchValue)
-        }
-
-        if (searchType === 'prefix') {
-            return collectionInstance.where(searchField, '>=', searchValue).where(searchField, '<=', searchValue + '\uf8ff')
-        } else {
-            return collectionInstance.where(searchField, searchType, searchValue)
         }
     }
 
     function isNumeric(n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
-    }
-
-    const handleDocs = (results) => {
-        const tmpRunData = []
-
-        results.docs.map((run) => tmpRunData.push({ ...run.data(), id: run.id }))
-
-        setcurrentResultRuns(tmpRunData)
-        setPaginationVariables((currentValue) => { return { ...currentValue, firstDocument: results.docs[0], lastDocument: results.docs.pop() } })
     }
 
     const PolarPropertieSection = ({ color, run, index }) => {
@@ -440,7 +422,7 @@ const RunsCard = ({ airfoilId }) => {
                     style={{ backgroundColor: `rgb(${color[0]*255},${color[1]*255},${color[2]*255})` }}
                     onClick={() => setIsOpened(currentValue => !currentValue)}
                 >
-                    {`Run ${run.id}`}
+                    {`Run ${run.runID}`}
                     <i className="material-icons collapse-icon">{isOpened ? "expand_less" : "expand_more"}</i>
                 </div>
                 <div className="ploted-run-polar-properties-details" >
@@ -473,10 +455,10 @@ const RunsCard = ({ airfoilId }) => {
                             return (
                                 <div className="run-item" key={index} onMouseEnter={() => setHoveredPlotedRunIndex(index)} onMouseLeave={() => setHoveredPlotedRunIndex(-1)}>
                                     <div className="remove-run-item-btn">
-                                        {hoveredPlotedRunIndex === index ? <i className="material-icons remove-ploted-run" onClick={() => setPlotedRuns(currentData => currentData.filter(runData => runData.id !== run.id))}>clear</i> : undefined}
+                                        {hoveredPlotedRunIndex === index ? <i className="material-icons remove-ploted-run" onClick={() => setPlotedRuns(currentData => currentData.filter(runData => runData.id !== run.runID))}>clear</i> : undefined}
                                     </div>
                                     <div className="information-area">
-                                        <span className="run-item-information" id="run-item-run-id">{run.id}</span>
+                                        <span className="run-item-information" id="run-item-run-id">{run.runID}</span>
                                         <span className="run-item-information" id="run-item-reynolds">{run.reynolds}</span>
                                         <span className="run-item-information" id="run-item-mach">{run.mach}</span>
                                     </div>
@@ -560,13 +542,13 @@ const RunsCard = ({ airfoilId }) => {
                 </div>
 
                 <div className="run-results-list">
-                    {currentResultRuns.map((run, index) => {
+                    {currentResultRuns?.map((run, index) => {
                         return (
-                            <div className='run-result-item' key={run.id}>
+                            <div className='run-result-item' key={run.runID}>
                                 <div className={`run-result-item-header ${openedCollapseIndex === index ? 'opened' : 'closed'}`}>
-                                    <i className="material-icons add-remove-run-result-icon" onClick={() => handleRunAddRemove(run)}>{`${runsData.some(({ id }) => id === run.id) ? 'remove' : 'add'}`}</i>
+                                    <i className="material-icons add-remove-run-result-icon" onClick={() => handleRunAddRemove(run)}>{`${runsData.some(({ id }) => id === run.runID) ? 'remove' : 'add'}`}</i>
                                     <div className="click-area" onClick={() => openedCollapseIndex === index ? setOpenedCollapseIndex(-1) : setOpenedCollapseIndex(index)}>
-                                        <span className="run-name">{`Run ${run.id}`}</span>
+                                        <span className="run-name">{`Run ${run.runID}`}</span>
                                         <div className="column-information">
                                             <span className="column-information-header">Mach</span>
                                             <span className="column-information-detail">{run.mach}</span>
@@ -579,18 +561,18 @@ const RunsCard = ({ airfoilId }) => {
                                 </div>
                                 <div className="run-result-item-options">
                                     <div className={`collapse ${openedCollapseIndex === index ? 'show' : ''}`}>
-                                        <div className="run-result-item-option" id={plotedRuns.some(runData => runData.id === run.id) ? 'remove-from-comparisson' : 'add-to-comparisson'}
+                                        <div className="run-result-item-option" id={plotedRuns.some(runData => runData.id === run.runID) ? 'remove-from-comparisson' : 'add-to-comparisson'}
                                             onClick={() => setPlotedRuns(
                                                 (currentValue) => {
-                                                    if (currentValue.some(runData => runData.id === run.id)) {
-                                                        return currentValue.filter(runData => runData.id !== run.id)
+                                                    if (currentValue.some(runData => runData.id === run.runID)) {
+                                                        return currentValue.filter(runData => runData.id !== run.runID)
                                                     } else {
                                                         return [...currentValue, run]
                                                     }
                                                 }
                                             )}>
-                                            <i className="material-icons option-icon">{plotedRuns.some(runData => runData.id === run.id) ? 'clear' : 'compare_arrows'}</i>
-                                            <span className="option-detail">{plotedRuns.some(runData => runData.id === run.id) ? 'Remove From Comparisson' : 'Add To Comparisson'}</span>
+                                            <i className="material-icons option-icon">{plotedRuns.some(runData => runData.id === run.runID) ? 'clear' : 'compare_arrows'}</i>
+                                            <span className="option-detail">{plotedRuns.some(runData => runData.id === run.runID) ? 'Remove From Comparisson' : 'Add To Comparisson'}</span>
                                         </div>
                                         <div className="run-result-item-option" id='view-details'>
                                             <i className="material-icons option-icon">description</i>

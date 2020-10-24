@@ -1,9 +1,10 @@
 import React, { createContext, useState, useContext } from 'react'
+import { projectAPI } from '../api/aerodbApi'
 import authContext from './auth'
 
 type SelectionListContextType = {
-    selectionListData: AirfoilDataType[],
-    runsData: RunDataType[],
+    selectionListData: SelectionAirfoilDataType[],
+    runsData: SelectionRunDataType[],
     projectName: string,
     setProjectName: React.Dispatch<React.SetStateAction<string>>,
     saveCurrentProject: (projectNameToSave: string) => void,
@@ -12,25 +13,24 @@ type SelectionListContextType = {
     closeCurrentProject: () => void,
     isSaved: boolean,
     setIsSaved: React.Dispatch<React.SetStateAction<boolean>>,
-    addAirfoilData: (airfoilData: AirfoilDataType) => void,
-    removeAirfoilData: (airfoilId: number | string) => void,
-    addRunData: (runData: RunDataType, airfoilId: number | string) => void,
-    removeRunData: (runId: number | string, airfoilId: number | string) => void,
-    includesRun: (runId: number, airfoilId: number) => boolean,
-    includesAirfoil: (airfoilId: number) => boolean
+    addAirfoilData: (airfoilData: SelectionAirfoilDataType) => void,
+    removeAirfoilData: (airfoilID: number | string) => void,
+    addRunData: (runData: SelectionRunDataType, airfoilID: number | string) => void,
+    removeRunData: (runId: number | string, airfoilID: number | string) => void,
+    includesRun: (runId: number, airfoilID: number) => boolean,
+    includesAirfoil: (airfoilID: number) => boolean
     removeAllData: () => void,
 }
 
-type AirfoilDataType = {
-    id: number | string,
+export type SelectionAirfoilDataType = {
+    airfoilID: number,
     name: string,
     geometrie: { x: number[], y: number[], side: string[] },
-    runsData: RunDataType[],
+    runsData: SelectionRunDataType[],
 }
 
-type RunDataType = {
-    id: number | string,
-    name: string,
+export type SelectionRunDataType = {
+    runID: number,
     mach: number,
     reynolds: number,
 }
@@ -39,68 +39,72 @@ const SelectionListContext = createContext<SelectionListContextType>({} as Selec
 
 export const SelectionListProvider: React.FC = ({ children }) => {
 
-    const [selectionListData, setSelectionListData] = useState<AirfoilDataType[]>(JSON.parse(localStorage.getItem('currentSelectionListData') || '[]'))
-    const [runsData, setRunsData] = useState<RunDataType[]>(JSON.parse(localStorage.getItem('currentSelectionListData') || '[]').map((airfoilData: AirfoilDataType) => airfoilData.runsData).flat())
+    const [selectionListData, setSelectionListData] = useState<SelectionAirfoilDataType[]>(JSON.parse(localStorage.getItem('currentSelectionListData') || '[]'))
+    const [runsData, setRunsData] = useState<SelectionRunDataType[]>(JSON.parse(localStorage.getItem('currentSelectionListData') || '[]').map((airfoilData: SelectionAirfoilDataType) => airfoilData.runsData).flat())
     const [projectName, setProjectName] = useState(localStorage.getItem('currentProjectName') || 'Untitled Project')
+    const [projectID, setProjectID] = useState<undefined | string>(undefined)    
     const [isSaved, setIsSaved] = useState(false)
-    const { userData, userRef } = useContext(authContext)
+    const { userData, updateUserData } = useContext(authContext)
 
 
     const saveCurrentProject = (projectNameToSave: string) => {
 
-        if (!userData || !userRef) return
+        if (!userData) return
 
-        if (userData.projectsName.includes(projectNameToSave)) {
+        if (userData.projects.find( project => { return project.name === projectNameToSave})) {
             window.alert('project name already exist')
         } else {
-            userRef.collection('projects').add({
-                projectName: projectNameToSave,
-                projectData: selectionListData,
-            }).then(() => {
-                console.log('project ' + projectNameToSave + ' saved')
+            projectAPI.createProject({
+                creator: userData._id,
+                name: projectNameToSave,
+                airfoils: selectionListData,
+            }).then( (project) => {
+                console.log('project ' + project.data.name + ' saved')
+                localStorage.setItem('currentProjectName', projectNameToSave)
+                setProjectName(projectNameToSave)
+                setProjectID(project.data._id)
+                setIsSaved(true)
+            }).catch( () => {
+                window.alert(`project could not be saved`)
             })
 
-            localStorage.setItem('currentProjectName', projectNameToSave)
-            setProjectName(projectNameToSave)
-            setIsSaved(true)
         }
     }
 
     const updateSavedProject = async () => {
-        if (!userRef) return
+        if (!userData || !projectID) return
 
-        const currentProjectQuery = await userRef.collection('projects').where('projectName', '==', projectName).get()
-        currentProjectQuery.docs[0].ref.update({
-            projectData: selectionListData,
-        }).then(() => {
-            console.log('project ' + projectName + ' updated')
+        await projectAPI.updateProject(projectID, selectionListData).then((project) => {
+            console.log('project ' + project.data.name + ' updated')
         })
     }
 
-    const selectSavedProject = (projectNameToSelect: string) => {
-        userRef?.collection('projects').where('projectName', '==', projectNameToSelect).get().then((projectQuery) => {
-            const projectData = projectQuery.docs[0].data()
-
-            localStorage.setItem('currentProjectName', projectData.projectName)
-            setProjectName(projectData.projectName)
+    // Atualmente Concertando, portanto esta quebrado. Preciso de fazer um metodo no auth context para atualizar os
+    // dados do usuario atual, assim sempre vamos ter os dados mais atuais quando consultarmos os projetos de um usuario
+    const selectSavedProject = async (projectNameToSelect: string) => {
+        // Para realizar esta operacao e preciso estar logado
+        if (!userData) return
+        await updateUserData()
+        const projectID = userData.projects.find( project => project.name === projectNameToSelect)?.projectID
+        // Retorna caso nao ache o projeto com o nome descrito
+        if (!projectID) return console.log('project not found')
+        await projectAPI.getOneProject( projectID ).then( project => {
+            localStorage.setItem('currentProjectName', project.data.name)
+            setProjectName(project.data.name)
             setIsSaved(true)
-            setSelectionListData(projectData.projectData)
+            setSelectionListData(project.data.airfoils)
         })
     }
 
     const closeCurrentProject = () => {
-        userRef?.update({
-            activeProject: '',
-        })
-
         localStorage.setItem('currentProjectName', 'Untitled Project')
         setProjectName('Untitled Project')
         setIsSaved(false)
         setSelectionListData([])
     }
 
-    const addAirfoilData = (newAirfoilData: AirfoilDataType) => {
-        const airfoilExists = selectionListData.some(airfoilData => airfoilData.id === newAirfoilData.id)
+    const addAirfoilData = (newAirfoilData: SelectionAirfoilDataType) => {
+        const airfoilExists = selectionListData.some(airfoilData => airfoilData.airfoilID === newAirfoilData.airfoilID)
         if (!airfoilExists) {
             setSelectionListData(currentData => { currentData.push(newAirfoilData); return currentData })
             localStorage.setItem('currentSelectionListData', JSON.stringify(selectionListData))
@@ -109,21 +113,21 @@ export const SelectionListProvider: React.FC = ({ children }) => {
         }
     }
 
-    const removeAirfoilData = (airfoilId: number | string) => {
-        setSelectionListData(currentData => currentData.filter((airfoilData) => airfoilData.id !== airfoilId))
+    const removeAirfoilData = (airfoilID: number | string) => {
+        setSelectionListData(currentData => currentData.filter((airfoilData) => airfoilData.airfoilID !== airfoilID))
         setRunsData(currentData => {
             return currentData.filter( runsData => {
-                return !selectionListData.find( airfoilData => airfoilData.id === airfoilId)?.runsData.some( selectionListRunData => selectionListRunData.id === runsData.id)
+                return !selectionListData.find( airfoilData => airfoilData.airfoilID === airfoilID)?.runsData.some( selectionListRunData => selectionListRunData.runID === runsData.runID)
             })
         })
-        localStorage.setItem('currentSelectionListData', JSON.stringify(selectionListData.filter((airfoilData) => airfoilData.id !== airfoilId)))
+        localStorage.setItem('currentSelectionListData', JSON.stringify(selectionListData.filter((airfoilData) => airfoilData.airfoilID !== airfoilID)))
     }
 
-    const addRunData = (newRunData: RunDataType, airfoilId: number | string) => {
-        const airfoilIntended = selectionListData.find(airfoilData => airfoilData.id === airfoilId)
+    const addRunData = (newRunData: SelectionRunDataType, airfoilID: number | string) => {
+        const airfoilIntended = selectionListData.find(airfoilData => airfoilData.airfoilID === airfoilID)
         if (airfoilIntended) {
-            const airfoilIndex = selectionListData.findIndex( airofoilData => airofoilData.id === airfoilId)
-            const runExists = airfoilIntended.runsData.some(runData => runData.id === newRunData.id)
+            const airfoilIndex = selectionListData.findIndex( airfoilData => airfoilData.airfoilID === airfoilID)
+            const runExists = airfoilIntended.runsData.some(runData => runData.runID === newRunData.runID)
             if (!runExists) {
                 const newSelectionListData = [...selectionListData]
                 newSelectionListData[airfoilIndex].runsData.push(newRunData)
@@ -139,25 +143,25 @@ export const SelectionListProvider: React.FC = ({ children }) => {
         }
     }
 
-    const removeRunData = (runId: number | string, airfoilId: number | string) => {
+    const removeRunData = (runId: number | string, airfoilID: number | string) => {
         setSelectionListData(currentData => {
-            const airfoilIndex = currentData.findIndex((airfoilData) => airfoilData.id === airfoilId)
-            const newAirfoilRunsData = currentData[airfoilIndex].runsData.filter((runData) => runData.id !== runId)
+            const airfoilIndex = currentData.findIndex((airfoilData) => airfoilData.airfoilID === airfoilID)
+            const newAirfoilRunsData = currentData[airfoilIndex].runsData.filter((runData) => runData.runID !== runId)
             if (newAirfoilRunsData) {
                 currentData[airfoilIndex].runsData = newAirfoilRunsData
             }
             localStorage.setItem('currentSelectionListData', JSON.stringify(currentData))
             return currentData
         })
-        setRunsData(currentData => currentData.filter(runData => runData.id !== runId))
+        setRunsData(currentData => currentData.filter(runData => runData.runID !== runId))
     }
 
-    const includesAirfoil = (airfoilId: number) => {
-        return selectionListData.some(airfoilData => airfoilData.id === airfoilId)
+    const includesAirfoil = (airfoilID: number) => {
+        return selectionListData.some(airfoilData => airfoilData.airfoilID === airfoilID)
     }
 
-    const includesRun = (runId: number, airfoilId: number) => {
-        return selectionListData.find(airfoilData => airfoilData.id === airfoilId)?.runsData.some(runData => runData.id === runId)
+    const includesRun = (runId: number, airfoilID: number) => {
+        return selectionListData.find(airfoilData => airfoilData.airfoilID === airfoilID)?.runsData.some(runData => runData.runID === runId)
     }
 
     const removeAllData = () => {

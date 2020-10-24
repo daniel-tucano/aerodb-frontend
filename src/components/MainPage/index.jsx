@@ -130,7 +130,7 @@ const SelectProjectModal = () => {
                             <div className="form-group">
                                 <label htmlFor="project-name" className="col-form-label">Project Name</label>
                                 <select className="form-control" id="saved-projects-names" onChange={({target}) => setSelectedOption(target.value)}>
-                                    {userData?.projectsName.map( (projectName, index) => <option value={projectName} key={index}>{projectName}</option>)}
+                                    {userData?.projects.map( (project, index) => <option value={project.name} key={index}>{project.name}</option>)}
                                 </select>
                             </div>
                         </form>

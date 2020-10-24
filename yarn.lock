@@ -1940,11 +1940,6 @@
   resolved "https://registry.yarnpkg.com/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
   integrity sha512-rr+OQyAjxze7GgWrSaJwydHStIhHq2lvY3BOC2Mj7KnzI7XK0Uw1TOOdI9lDoajEbSWLiYgoo4f1R51erQfhPQ==
 
-"@types/d3@^3":
-  version "3.5.43"
-  resolved "https://registry.yarnpkg.com/@types/d3/-/d3-3.5.43.tgz#e9b4992817e0b6c5efaa7d6e5bb2cee4d73eab58"
-  integrity sha512-t9ZmXOcpVxywRw86YtIC54g7M9puRh8hFedRvVfHKf5YyOP6pSxA0TvpXpfseXSCInoW4P7bggTrSDiUOs4g5w==
-
 "@types/eslint-visitor-keys@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@types/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#1ee30d79544ca84d68d4b3cdb0af4f205663dd2d"
@@ -2026,13 +2021,6 @@
   resolved "https://registry.yarnpkg.com/@types/parse-json/-/parse-json-4.0.0.tgz#2f8bb441434d163b35fb8ffdccd7138927ffb8c0"
   integrity sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==
 
-"@types/plotly.js@*":
-  version "1.50.17"
-  resolved "https://registry.yarnpkg.com/@types/plotly.js/-/plotly.js-1.50.17.tgz#2569ce88c211ac86185b8de6798748a51fbd884f"
-  integrity sha512-d2flG2dmGPGrUSWdhbC+yV7GOr4S6D/lbQtVvANlkr4PCm00r49oghlknj9Ms7/Wkz03pDRKnrH/x2OLUfyRqw==
-  dependencies:
-    "@types/d3" "^3"
-
 "@types/prop-types@*":
   version "15.7.3"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
@@ -2062,14 +2050,6 @@
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.9.8.tgz#fe4c1e11dfc67155733dfa6aa65108b4971cb423"
   integrity sha512-ykkPQ+5nFknnlU6lDd947WbQ6TE3NNzbQAkInC2EKY1qeYdTKp7onFusmYZb+ityzx2YviqT6BXSu+LyWWJwcA==
   dependencies:
-    "@types/react" "*"
-
-"@types/react-plotly.js@^2.2.4":
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/@types/react-plotly.js/-/react-plotly.js-2.2.4.tgz#360fcfcace64d0ef173cf0c7d67fc2441b39f659"
-  integrity sha512-dsvngno7Ar13XoF2eJXM609Msoc5DPboNp8x4NE4L+rsBEEsu16/0b0Fze8REx3fA4HEUk4rcn3uJsx48m2sew==
-  dependencies:
-    "@types/plotly.js" "*"
     "@types/react" "*"
 
 "@types/react-router-dom@^5.1.5":
@@ -2723,6 +2703,13 @@ aws4@^1.8.0:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.9.1.tgz#7e33d8f7d449b3f673cd72deb9abdc552dbe528e"
   integrity sha512-wMHVg2EOHaMRxbzgFJ9gtjOOCrI80OHLG14rxi28XwOW8ux6IiEbRCGGGqCtdAIg4FQCbW20k9RsT4y3gJlFug==
+
+axios@^0.20.0:
+  version "0.20.0"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.20.0.tgz#057ba30f04884694993a8cd07fa394cff11c50bd"
+  integrity sha512-ANA4rr2BDcmmAQLOKft2fufrtuvlqR+cXNNinUmvfeSNCOF98PZL+7M/v1zIdGo7OLjEA9J2gXJL+j4zGsl0bA==
+  dependencies:
+    follow-redirects "^1.10.0"
 
 axobject-query@^2.0.2:
   version "2.1.2"
@@ -5180,6 +5167,11 @@ follow-redirects@^1.0.0:
   integrity sha512-4eyLK6s6lH32nOvLLwlIOnr9zrL8Sm+OvW4pVTJNoXeGzYIkHVf+pADQi+OJ0E67hiuSLezPVPyBcIZO50TmmQ==
   dependencies:
     debug "^3.0.0"
+
+follow-redirects@^1.10.0:
+  version "1.13.0"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.13.0.tgz#b42e8d93a2a7eea5ed88633676d6597bc8e384db"
+  integrity sha512-aq6gF1BEKje4a9i9+5jimNFIpq4Q1WiwBToeRK5NvZBd/TRsmW8BsJfOEGkr76TbOyPVD3OVDN910EcUNtRYEA==
 
 for-in@^0.1.3:
   version "0.1.8"
@@ -7823,6 +7815,11 @@ obuf@^1.0.0, obuf@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/obuf/-/obuf-1.1.2.tgz#09bea3343d41859ebd446292d11c9d4db619084e"
   integrity sha512-PX1wu0AmAdPqOL1mWhqmlOd8kOIZQwGZw6rh7uby9fTc5lhaOWFLX3I6R1hrF9k3zUY40e6igsLGkDXK92LJNg==
+
+odata-query-builder@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/odata-query-builder/-/odata-query-builder-0.0.7.tgz#9dca352879bbcd0c9a7e7c8a1a0fad0970b4cf39"
+  integrity sha512-BUhSLWA8/qtC2Hxf2erCteYaaqotYSt/qim+QA4OH6GpTF8zrp0qFXtmHgovojpGh4yHumdRTmHlHAmeoTOHCw==
 
 on-finished@~2.3.0:
   version "2.3.0"

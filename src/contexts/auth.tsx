@@ -1,6 +1,7 @@
 /* eslint-disable no-fallthrough */
 import React, { createContext, useState, useEffect } from 'react'
-import fireApp, { db } from '../firebase/fireApp'
+import { userAPI, UserDataType } from '../api/aerodbApi'
+import fireApp from '../firebase/fireApp'
 import * as firebase from 'firebase'
 
 const googleProvider = new firebase.auth.GoogleAuthProvider();
@@ -8,27 +9,18 @@ googleProvider.addScope('https://www.googleapis.com/auth/cloud-platform')
 googleProvider.addScope('https://www.googleapis.com/auth/datastore')
 const facebookProvider = new firebase.auth.FacebookAuthProvider()
 
-export interface UserData {
-    about: string;
-    email: string;
-    institution: string;
+export interface ProjectRefs {
     name: string;
-    providers: string;
-    sex: string;
-    uid: string;
-    userAirfoils: [];
-    projectsName: string[],
-    activeProject: string,
-    yearOfBirth: string;
+    projectId: number;
 }
 
 export interface AuthContextData {
     signIn: (providerOption: string, additionalData?: { email: string; password: string }) => void;
     signOut: () => void;
     isLogged: boolean;
-    user: firebase.firestore.DocumentData | null;
-    userData: UserData | null;
-    userRef: firebase.firestore.DocumentReference<firebase.firestore.DocumentData> | null;
+    updateUserData: () => Promise<void>;
+    user: firebase.User | undefined;
+    userData: UserDataType | undefined;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData)
@@ -36,32 +28,35 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 export const AuthProvider: React.FC = ({ children }) => {
 
     const [isLogged, setLogged] = useState(false)
-    const [user, setUser] = useState<object | null>(null)
-    const [userData, setUserData] = useState<UserData | null>(null)
-    const [userRef, setUserRef] = useState<firebase.firestore.DocumentReference<firebase.firestore.DocumentData> | null>(null)
+    const [user, setUser] = useState<firebase.User | undefined>(undefined)
+    const [userData, setUserData] = useState<UserDataType | undefined>(undefined)
 
     useEffect(() => {
 
         fireApp.auth().onAuthStateChanged(async (usuario) => {
             if (usuario) {
                 // console.log(usuario)
-                const result = await db.collection('users').where('uid', '==', usuario.uid).get()
-                setUserData(result.docs[0].data() as UserData)
-                setUserRef(result.docs[0].ref)
+                const usuarioDB = await userAPI.getOneUser(usuario.uid)
+                setUserData(usuarioDB.data)
                 setUser(usuario)
                 setLogged(true)
+                document.cookie = `authJWT=${usuario?.getIdToken()}`
             }
         })
 
-        fireApp.auth().getRedirectResult().then((result) => {
+        fireApp.auth().getRedirectResult().then(async (result) => {
             if (result.user) {
                 // console.log(result)
+                const usuarioDB = await userAPI.getOneUser(result.user.uid)
+                const authToken = await result.user.getIdToken()
+                setUserData(usuarioDB.data)
                 setUser(result.user)
                 setLogged(true)
+                document.cookie = `authJWT=${authToken}`
             }
         }).catch((error) => {
             console.log(error.message)
-            setUser({})
+            setUser(undefined)
             setLogged(false)
         })
     }, [])
@@ -84,12 +79,12 @@ export const AuthProvider: React.FC = ({ children }) => {
                             setUser(result.user)
                             setLogged(true)
                         } else {
-                            setUser({})
+                            setUser(undefined)
                             setLogged(false)
                         }
                     }).catch((error) => {
                         console.log(error.message)
-                        setUser({})
+                        setUser(undefined)
                         setLogged(false)
                     })
                 } else {
@@ -105,7 +100,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
     const signOut = () => {
         fireApp.auth().signOut().then(() => {
-            setUser({})
+            setUser(undefined)
             setLogged(false)
             console.log('user sign out')
         }).catch((error) => {
@@ -114,8 +109,15 @@ export const AuthProvider: React.FC = ({ children }) => {
         })
     }
 
+    // Atualiza os dados do usuario atual quando invocado
+    const updateUserData = async () => {
+        if (!user) return
+        const usuarioDB = await userAPI.getOneUser(user.uid)
+        setUserData(usuarioDB.data)
+    }
+
     return (
-        <AuthContext.Provider value={{ signIn, signOut, isLogged, user, userData, userRef }}>
+        <AuthContext.Provider value={{ signIn, signOut, updateUserData, isLogged, user, userData }}>
             {children}
         </AuthContext.Provider>
     )
