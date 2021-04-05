@@ -17,8 +17,8 @@ const Profile = () => {
     const [airfoilPlotSVG, setAirfoilPlotSVG] = useState(undefined)
 
     useEffect( () => {
-        if (userData) {
-            userData.userAirfoils[3].get().then((result) => {
+        if (userData && userData.userAirfoils && userData.userAirfoils.length > 0) {
+            userData.userAirfoils[0].get().then((result) => {
                 setAirfoilName(result.data().name)
                 setAirfoilPlotSVG(plotAirfoilData(result.data().geometrie))
             })

@@ -1,4 +1,4 @@
-import { QueryBuilder } from 'odata-query-builder'
+import buildQuery, { QueryOptions } from 'odata-query'
 import axios, { AxiosResponse } from 'axios'
 import { SelectionAirfoilDataType } from '../contexts/SelectionListContext'
 
@@ -100,85 +100,90 @@ export type PaginationResult<T> = {
     prevPage: boolean,
     nextPage: boolean,
 }
+export interface BasicAPI<T> {
+    getPage: (options: {page?: number, limit?: number}, filter?: Partial<QueryOptions<T>>) => Promise<AxiosResponse<PaginationResult<T>>>
+    getOne: (id: string | number) => Promise<AxiosResponse<T>>
+    deleteOne: (id: string | number) => Promise<AxiosResponse<undefined>>
+    updateOne: (id: string | number, updateData: T) => Promise<AxiosResponse<T>>
+    createOne?: (data: T) => Promise<AxiosResponse<T>>
+}
 
-export const airfoilAPI = {
-    async getOneAirfoil (airfoilId: number) {
-        return await axios.get<any,AxiosResponse<AirfoilDataType>>(REACT_APP_API_URL+`/airfoils/${airfoilId}`)
+export const airfoilAPI: BasicAPI<AirfoilDataType> = {
+    async getOne (id: string | number) {
+        return await axios.get<any,AxiosResponse<AirfoilDataType>>(REACT_APP_API_URL+`/airfoils/${id}`)
     },
 
-    async deleteAirfoil (airfoilId: number) {
-        return await axios.delete(REACT_APP_API_URL+`/airfoils/${airfoilId}`)
+    async deleteOne (id: string | number) {
+        return await axios.delete(REACT_APP_API_URL+`/airfoils/${id}`)
     },
 
-    async getAirfoilsPage (options: { page?: number, limit?: number} = { page: 1, limit: 10}) {
-        return await axios.get<any,AxiosResponse<PaginationResult<AirfoilDataType>>>(REACT_APP_API_URL+`/airfoils?page=${options.page}&limit=${options.limit}`)
+    async getPage (options: { page?: number, limit?: number} = { page: 1, limit: 10}, filter?: Partial<QueryOptions<AirfoilDataType>>) {
+        const queryParameters = buildQuery(filter)
+        return await axios.get<any,AxiosResponse<PaginationResult<AirfoilDataType>>>(REACT_APP_API_URL+`/airfoils${filter ? queryParameters + "&" : "?"}page=${options.page}&limit=${options.limit}`)
     },
 
-    async updateAirfoil (airfoilId: string, updateData: Object) {
-        return await axios.put<any,AxiosResponse<UserDataType>>(REACT_APP_API_URL+`/airfoils/${airfoilId}`,updateData)
+    async updateOne (id: string | number, updateData: AirfoilDataType) {
+        return await axios.put<any,AxiosResponse<AirfoilDataType>>(REACT_APP_API_URL+`/airfoils/${id}`,updateData)
     },
 }
 
-export const runAPI = { 
-    async getOneRun (runId: number) {
-        return await axios.get<any,AxiosResponse<RunDataType>>(REACT_APP_API_URL+`/runs/${runId}`)
+export const runAPI: BasicAPI<RunDataType> = { 
+    async getOne (id: string | number) {
+        return await axios.get<any,AxiosResponse<RunDataType>>(REACT_APP_API_URL+`/runs/${id}`)
     },
 
-    async deleteRun (runId: number) {
-        return await axios.delete(REACT_APP_API_URL+`/runs/${runId}`)
+    async deleteOne (id: string | number) {
+        return await axios.delete(REACT_APP_API_URL+`/runs/${id}`)
     },
 
-    async getRunsPage (query?: QueryBuilder, options: {page?: number, limit?: number} = { page: 1, limit: 10}) {
-        let queryString
-        if (query?.filter) {
-            // Converte a query para string, retira o '?' no comeco e adicina um & ao final
-            queryString = query.toQuery().substring(1) + '&'
-        }
-
-        return await axios.get<any,AxiosResponse<PaginationResult<RunDataType>>>(REACT_APP_API_URL+`/runs?${queryString}page=${options.page}&limit=${options.limit}`)
+    async getPage (options: {page?: number, limit?: number} = { page: 1, limit: 10}, filter?: Partial<QueryOptions<RunDataType>>) {
+        const queryParameters = buildQuery(filter)
+        return await axios.get<any,AxiosResponse<PaginationResult<RunDataType>>>(REACT_APP_API_URL+`/runs${filter ? queryParameters + "&" : "?"}page=${options.page}&limit=${options.limit}`)
     },
 
-    async updateRun (runId: string, updateData: Object) {
-        return await axios.put<any,AxiosResponse<UserDataType>>(REACT_APP_API_URL+`/runs/${runId}`,updateData)
+    async updateOne (id: string | number, updateData: RunDataType) {
+        return await axios.put<any,AxiosResponse<RunDataType>>(REACT_APP_API_URL+`/runs/${id}`,updateData)
     },
 }
 
-export const userAPI = { 
-    async getOneUser (userID: string) {
-        return await axios.get<any,AxiosResponse<UserDataType>>(REACT_APP_API_URL+`/users/${userID}?uid=true`)
+export const userAPI: BasicAPI<UserDataType> = { 
+    async getOne (id: string | number) {
+        return await axios.get<any,AxiosResponse<UserDataType>>(REACT_APP_API_URL+`/users/${id}?uid=true`)
     },
     
-    async deleteUser (userID: string) {
-        return await axios.delete(REACT_APP_API_URL+`/users/${userID}`)
+    async deleteOne (id: string | number) {
+        return await axios.delete(REACT_APP_API_URL+`/users/${id}`)
     },
     
-    async getUsersPage (options: { page?: number, limit?: number} = { page: 1, limit: 10}) {
-        return await axios.get<any,AxiosResponse<PaginationResult<UserDataType>>>(REACT_APP_API_URL+`/users?page=${options.page}&limit=${options.limit}`)
+    async getPage (options: { page?: number, limit?: number} = { page: 1, limit: 10}, filter?: Partial<QueryOptions<UserDataType>>) {
+        const queryParameters = buildQuery(filter)
+        return await axios.get<any,AxiosResponse<PaginationResult<UserDataType>>>(REACT_APP_API_URL+`/users${filter ? queryParameters + "&" : "?"}page=${options.page}&limit=${options.limit}`)
     },
 
-    async updateUser (userID: string, updateData: Object) {
-        return await axios.put<any,AxiosResponse<UserDataType>>(REACT_APP_API_URL+`/users/${userID}`,updateData)
+    async updateOne (id: string | number, updateData: UserDataType) {
+        return await axios.put<any,AxiosResponse<UserDataType>>(REACT_APP_API_URL+`/users/${id}`,updateData)
     }
 }
 
-export const projectAPI = { 
-    async getOneProject (projectID: string) {
-        return await axios.get<any,AxiosResponse<ProjectDataType>>(REACT_APP_API_URL+`/projects/${projectID}`)
+export const projectAPI: BasicAPI<ProjectDataType> = { 
+    async getOne (id: string | number) {
+        return await axios.get<any,AxiosResponse<ProjectDataType>>(REACT_APP_API_URL+`/projects/${id}`)
     },
 
-    async deleteProject (projectID: string) {
-        return await axios.delete(REACT_APP_API_URL+`/projects/${projectID}`)
+    async deleteOne (id: string | number) {
+        return await axios.delete(REACT_APP_API_URL+`/projects/${id}`)
     },
 
-    async getProjectsPage (options: { page?: number, limit?: number} = { page: 1, limit: 10}) {
-        return await axios.get<any,AxiosResponse<PaginationResult<ProjectDataType>>>(REACT_APP_API_URL+`/projects?page=${options.page}&limit=${options.limit}`)
+    async getPage (options: { page?: number, limit?: number} = { page: 1, limit: 10}, filter?: Partial<QueryOptions<ProjectDataType>>) {
+        const queryParameters = buildQuery(filter)
+        return await axios.get<any,AxiosResponse<PaginationResult<ProjectDataType>>>(REACT_APP_API_URL+`/projects${filter ? queryParameters + "&" : "?"}page=${options.page}&limit=${options.limit}`)
     },
 
-    async updateProject (projectID: string, updateData: Object) {
-        return await axios.put<any,AxiosResponse<ProjectDataType>>(REACT_APP_API_URL+`/projects/${projectID}`,updateData)
+    async updateOne (id: string | number, updateData: Object) {
+        return await axios.put<any,AxiosResponse<ProjectDataType>>(REACT_APP_API_URL+`/projects/${id}`,updateData)
     },
 
-    async createProject (project: ProjectDataType) {
-        return await axios.post<any,AxiosResponse<ProjectDataType>>(REACT_APP_API_URL+`/projects`, project)
+    async createOne (data: ProjectDataType) {
+        return await axios.post<any,AxiosResponse<ProjectDataType>>(REACT_APP_API_URL+`/projects`, data)
     }
 }
